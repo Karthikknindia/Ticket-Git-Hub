@@ -1,0 +1,63 @@
+<body>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+	<h1 style="text-align: center;"><strong>Your ticket Is Booked!!</strong></h1>
+
+	<div class="ticket" id="ticket" #ticket>
+
+		<div class="left">
+			<div class="image">
+				<div>
+					<img class="images" [src]="booking.booking_poster" alt="Movie Poster">
+				</div>
+
+			</div>
+			<div class="ticket-info">
+				<p class="date">
+
+					{{booking.booking_date}}
+				</p>
+				<div class="show-name" >
+					<h1>{{booking.booking_movie}}</h1>
+					<h2>{{booking.booking_theater}}</h2>
+				</div>
+				<div class="time">
+					<p>{{booking.booking_showtime}}</p>
+					<p>SEATS - {{booking.booking_seats}}</p>
+				</div>
+				<p class="location"><span>Coimbatore</span>
+					<span class="separator"><i class="far fa-smile"></i></span><span>NAMMA KOVAI</span>
+				</p>
+			</div>
+		</div>
+		<div class="right">
+
+			<div class="right-info-container">
+				<div class="show-name">
+					<h1>{{booking.booking_movie}}</h1>
+				</div>
+				<div class="time">
+					<p>Show Time - {{booking.booking_showtime}}</p>
+					<p>Seats - {{booking.booking_seats}} </p>
+				</div>
+				<div class="barcode">
+					<img src="assets\images\qr-code-bc94057f452f4806af70fd34540f72ad.png" alt="QR code">
+				</div>
+				<p class="ticket-number">
+					#20030220
+				</p>
+			</div>
+		</div>
+	</div>
+	<div >
+		<mat-dialog-actions align="center">
+
+			<button class="buttond" style="background-color: rgb(61, 60, 60);color: white;" (click)="downloadTicket()" mat-raised-button> Download Ticket </button>
+		</mat-dialog-actions>
+	</div>
+	<div>
+
+        <button class="close"  mat-dialog-close="" color="warn" mat-raised-button>Close</button>
+    </div>
+
+</body>

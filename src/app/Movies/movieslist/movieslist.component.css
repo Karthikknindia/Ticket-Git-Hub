@@ -1,0 +1,23 @@
+body{
+  width: 70vh;
+}
+.button{
+  border: none;
+  align-items: end;
+  margin-left: 30px;
+  
+
+}
+button{
+  margin-top: 20px;
+  margin-left: 10rem;
+  margin-bottom: 10px;
+}
+
+.close{
+  position:absolute;
+margin-top: 1.5rem;
+margin-left:4rem;
+
+
+}

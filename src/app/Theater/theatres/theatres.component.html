@@ -1,0 +1,120 @@
+<button mat-dialog-close type="button" class="close2" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+<div class="height">
+    
+
+    <div mat-dialog-title style="text-align: center;">
+        <h2>Theatres</h2>
+    </div>
+
+    <div>
+        <div mat-dialog-content style="text-align: center;">
+            <p>You Can Book Your Tickets in online on this Book Your Cinima App </p>
+
+        </div>
+        <mat-hint style="margin-top: 10rem;text-align: center;" >
+            <p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Selected Movie - {{movie.movie_name}}</p>
+          </mat-hint>
+        <mat-accordion class="headers-align">
+            <mat-dialog-actions align="center">
+
+
+                <mat-form-field style="margin-right: 30px;" class="example-full-width" appearance="outline">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
+                        (dateChange)="selectedDate = $event.value">
+
+
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                     
+                        
+                    
+                </mat-form-field>
+
+            
+                
+                
+                </mat-dialog-actions> 
+                
+
+                <mat-hint style="margin-top: 10rem;text-align: center;" *ngIf="!selectedDate">
+                    <p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"><strong>Select a Date to go For Theaters</strong></p>
+                  </mat-hint>
+                  
+
+
+
+
+
+
+
+                  
+
+                <mat-expansion-panel  *ngIf="movie" [hidden]="movie && !selectedDate" style="margin-bottom: 30px;">
+                    
+
+
+                <mat-expansion-panel-header>
+
+                    <mat-panel-title>
+
+                       {{movie.movie_theater}}
+
+                    </mat-panel-title>
+                    <mat-panel-title>
+                       
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <p><strong>Movie Director - </strong>{{movie.movie_director}}</p>
+
+                    </mat-panel-description>
+                    
+                </mat-expansion-panel-header>
+
+
+                <div mat-dialog-actions class="time-but" align="center">
+                    
+                    <button mat-raised-button style="margin-right: 20px;background-color: rgb(118, 191, 255);" *ngFor="let timing of movie.movie_showtiming.split(',')" (click)="gotopage(timing,movie)">
+                      {{ timing }}
+                    </button>
+                  </div>
+                  
+                  
+            </mat-expansion-panel>
+
+
+        </mat-accordion>
+        
+    </div>
+
+
+<div class="grid-container2" *ngIf="selectedDate">
+   
+    <div class="grids">
+
+        <div>
+            <img class="images" [src]="movie.movie_poster" alt="Movie Poster">
+        </div>
+
+    </div>
+    <div class="grids">
+        <div class="description">
+
+            <p><strong>Movie Tittle:</strong> {{ movie.movie_name }}</p>
+            <p><strong>Movie Categories:</strong> {{ movie.movie_categories }}</p>
+            <p><strong> Movie Time Duration-</strong> {{ movie.movie_timeduration }}</p>
+            <p><strong>Movie Director -</strong>{{ movie.movie_director }} </p>
+            <p><strong>Movie Description -</strong><br>{{ movie.movie_cast }} </p>
+
+
+
+        </div>
+    </div>
+    <div>
+
+        <button class="close" mat-raised-button mat-dialog-close="" color="primary">Cancel</button>
+    </div>
+</div>
+</div>

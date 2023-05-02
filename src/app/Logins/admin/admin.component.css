@@ -1,0 +1,241 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.tittle{
+text-align: center;
+padding-top: 30px;
+font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+/* .leobutton{
+  margin-left: 15.5rem;
+}
+.interbutton{
+  margin-left: 18rem;
+}
+
+.leop{
+  margin-left: 15rem;
+} */
+/* .frame{
+ align-items: center;
+ margin-left: 35%;
+  margin-top: 70px;
+}
+.frame2{
+  margin-left: 25%;
+  align-items: center;
+  margin-top: 70px;
+}
+.frame3{
+  align-items: center;
+  margin-left: 25%;
+  margin-top: 70px;
+} */
+
+/* .image{
+  height: 100%;
+  max-height:320px;
+  align-items: center;
+  margin-left: 25%;
+ 
+}
+.image2{
+  height: 100%;
+  max-height: 230px;
+  align-items: center;
+  margin-left: 25%;
+}
+
+.image3{
+  height: 100%;
+  max-height:320px;
+  align-items: center;
+  margin-left: 25%;
+} */
+/* important */
+
+/* .image{
+margin-bottom: 20px;
+
+} */
+.image5{
+
+  height: 100%;
+  max-height:280px;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-left: 20%;
+  margin-top: -20px;
+}
+.logo{
+  height: 120%;
+  max-height:50px;
+  
+  /* background-color: rgba(255, 255, 255, 0.689); */
+  /* border-top-left-radius: 70px;
+border-top-right-radius: 70px;
+border-bottom-left-radius:70px ;
+border-bottom-right-radius:70px ;
+background-color: #fff; */
+}
+
+.frame5{
+  /* max-height:280px; */
+  margin-left: 18%;
+  align-items: center;
+  margin-top: -10px;
+}
+.frame3{
+  margin-left: 16%;
+  max-height:280px;
+}
+
+.button5{
+  margin-left: 20rem;
+  
+}
+/* .border {
+  border: 10px solid green;
+  
+} */
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  height: 52vh;
+
+  background-color:rgb(224 81 10);
+  
+  align-items: center;
+}
+
+/* .grid1 {
+  
+  
+  padding: 20px;
+  
+  
+}
+
+.grid2 {
+  
+  
+  padding: 20px;
+  
+  
+} */
+.grid3{
+margin-left: 10rem;
+
+}
+
+/*  posters */
+.grid-container2 {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  align-items: center;
+  background-color: antiquewhite;
+  
+}
+.grids{
+  
+  padding: 20px;
+  font-size: 30px;
+  
+  
+}
+
+.images{
+  height: 100%;
+  max-height:250px;
+  margin-left: 30%;
+ 
+}
+.buttons{
+  margin-left: 8rem;
+
+}
+.signout {
+  margin-left: 50px;
+}
+
+.addt  {
+  margin-right: 50px;
+}
+
+.addm  {
+  margin-right: 50px;
+}
+h1{
+  
+  font-weight: bold;
+  color: rgb(117, 124, 124);
+ font-size: large;
+  font-family: Verdana, sans-serif;
+  text-align: center;
+  margin-left: 70px;
+  
+  
+}
+.mat-toolbar.mat-primary {
+  background: #000000;
+  color: #fff;
+}
+.moviename {
+  
+  margin-right: 20px;
+
+}
+.buttonic{
+  
+  margin-left: 1.6rem;
+  border: none;
+
+border-radius: 4px;
+ margin-top: 10px;
+ font-size: 24px;
+}
+
+.zero{
+  margin-left: 5rem;
+ 
+}
+.mat-icon{
+font-size: smaller;
+user-select: none;
+  background-repeat: no-repeat;
+  display: inline-block;
+  fill: currentColor;
+  height: 20px;
+  width: 24px;
+  overflow: hidden;
+}
+.box {
+width: 135px;
+height: 180px;
+background-color: #cfcdcd;
+border: none;
+margin-bottom: 2rem;
+align-items: center;
+}
+.plusb{
+background-color: rgb(25, 25, 25);
+margin-bottom: 20px;
+margin-top: 10px;
+margin-left: 10.3rem;
+
+}
+.plus{
+color: #fff;
+}
+.text{
+text-align: center;
+margin-left: 9.5rem;
+}
+
+
+
+
+

@@ -1,0 +1,43 @@
+.grid-container2 {
+    display: grid;
+    grid-template-columns: auto auto ;
+    height:33vh;
+    width: 35vw;
+    padding: 10px;
+  }
+  .grids{
+    
+    padding: 20px;
+    font-size: 30px;
+    
+    
+  }
+
+  .images{
+    height: 100%;
+    max-height:320px;
+    margin-left: 30%;
+   
+  }
+  .description{
+    text-align: center;
+    align-items: center;
+    font-size: small;
+    margin-top: 2rem;
+    
+  }
+  .tittle{
+    margin-top: 4rem;
+  }
+  .close{
+ position: absolute;
+ top: 0;
+ right: 0;
+  border: none;
+  
+  
+  }
+  .close:hover{
+    color: aliceblue;
+    background-color: black;
+  }

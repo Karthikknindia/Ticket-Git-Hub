@@ -1,0 +1,57 @@
+
+
+
+
+<body class="text-center">
+ 
+  <main class="form-signin w-100 m-auto">
+    <!-- #form="ngForm" (ngSubmit)="onSubmit()" -->
+    <form ngNativeValidate #form="ngForm" name="form" (ngSubmit)="Login(login)" #f="ngForm">
+
+      <h1 class="h3 mb-3 fw-normal" style="color: white; margin-bottom: 20px; ">Login </h1>
+
+      <div class="form-floating">
+        <input type="email" class="form-control" id="floatingInput" style=" margin-top: 20px; "
+          placeholder="name@example.com" name="kk" [(ngModel)]="login.login_email" required>
+        <label for="floatingInput">Email address</label>
+      </div>
+
+
+
+
+      <div class="form-floating">
+        <input type="password" style=" margin-top: 20px;  " class="form-control" id="floatingPassword"
+          placeholder="Password"  name="kk" [(ngModel)]="login.login_password" required>
+        <label for="floatingPassword">Password</label>
+      </div>
+
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="form.invalid" style=" margin-top: 30px;" >Sign in</button>
+      
+      <button routerLink="/register" class=" register w-100 btn btn-lg "
+        style="background-color:rgb(0, 218, 145); color: rgb(255, 255, 255);margin-top: 20px;"
+        type="button">Register</button>
+
+       
+
+
+        
+
+
+
+
+
+
+    </form>
+  </main>
+
+
+
+
+
+
+
+
+
+</body>
+

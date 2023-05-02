@@ -1,0 +1,134 @@
+<h1><strong>Add Movies</strong></h1>
+
+<body>
+
+<form ngNativeValidate #form="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="container">
+
+        <div class="input">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Movie Name</mat-label>
+                <input matInput [(ngModel)]="movie.movie_name" name="Name" required>
+            </mat-form-field>
+        </div>
+
+        <div class="input">
+
+            <mat-form-field appearance="fill">
+                <mat-label>Movie Catagories</mat-label>
+                <mat-select [(ngModel)]="movie.movie_categories" name="Catagories" required>
+                    <mat-option value="Action">Action</mat-option>
+                    <mat-option value="Thriller">Thriller</mat-option>
+                    <mat-option value="Drama">Drama</mat-option>
+                    <mat-option value="Sci-Fi">Sci-Fi</mat-option>
+                    <mat-option value="Crime">Crime</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="input">
+
+            <mat-form-field appearance="fill">
+                <mat-label>Movie Theater</mat-label>
+                <mat-select [(ngModel)]="movie.movie_theater" name="theater" required [(value)]="selectedTheater">
+                    <mat-option *ngFor="let theater of theaters" [value]="theater.theater_name">
+                        {{ theater.theater_name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        
+        <div class="input">
+            <mat-label>Movie Poster</mat-label>
+
+            <form action="" method="post" enctype="multipart/form-data">
+                <!-- <input type="file" (change)="onFileSelected($event)" name="poster" required> -->
+                <input type="file" (change)="onFileChange($event)">
+                <!-- <input type="file" (change)="onFileSelected($event)"> -->
+            </form>
+           
+
+        </div>
+
+
+
+        <div class="input">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Movie Director</mat-label>
+                <input matInput [(ngModel)]="movie.movie_director" name="Director" required>
+            </mat-form-field>
+        </div>
+
+
+        <div class="input">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Movie Timeduration</mat-label>
+                <input matInput [(ngModel)]="movie.movie_timeduration" name="timeduration" required>
+            </mat-form-field>
+        </div>
+        <div class="input">
+            <mat-label>Movie Thumbnail</mat-label>
+
+            <form action="" method="post" enctype="multipart/form-data">
+                <!-- <input type="file" (change)="onFileSelected($event)" name="poster" required> -->
+                <input type="file" (change)="onFileChange2($event)">
+                <!-- <input type="file" (change)="onFileSelected($event)"> -->
+            </form>
+           
+
+        </div>
+        <div class="input">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Movie Embaded Link</mat-label>
+                <input matInput [(ngModel)]="movie.movie_ytlink" name="embadded" required>
+               
+            </mat-form-field>
+        </div>
+        <div class="input">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Movie Cast & Description</mat-label>
+                <input type="textarea" matInput [(ngModel)]="movie.movie_cast" name="cast" required>
+            </mat-form-field>
+        </div>
+
+         <div class="input grids">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Movie Showtiming</mat-label>
+                            <input matInput [(ngModel)]="movie.movie_showtiming" name="Showtiming" required>
+
+                        </mat-form-field>
+                        <section class="example-section">
+                            <mat-checkbox class="example-margin timings"
+                                (change)="updateShowTiming($event.source, '8.00AM', 'Morning')">8.00AM</mat-checkbox>
+                            <mat-checkbox class="example-margin"
+                                (change)="updateShowTiming($event.source, '11.00AM', 'Matinee')">11.00AM</mat-checkbox>
+                                <div>
+
+                                    <mat-checkbox class="example-margin"
+                                    (change)="updateShowTiming($event.source, '2.00PM', 'Afternoon')">2.00PM</mat-checkbox>
+                                    <mat-checkbox class="example-margin"
+                                    (change)="updateShowTiming($event.source, '7.00PM', 'Evening')">7.00PM</mat-checkbox>
+                                </div>
+                            <mat-checkbox class="example-margin"
+                                (change)="updateShowTiming($event.source, '10.00PM', 'Night')">10.00PM</mat-checkbox>
+                        </section>
+
+                    </div>
+        
+    </div>
+    <div class="button">
+        <button mat-raised-button color="warn">Add Movie</button>
+
+    </div>
+
+  
+    <button class="close" mat-raised-button mat-dialog-close="" color="primary">Cancel</button>
+</form>
+
+</body>

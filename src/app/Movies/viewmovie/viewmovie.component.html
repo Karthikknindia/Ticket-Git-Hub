@@ -1,0 +1,28 @@
+<body>
+
+    <div class="grid-container2">
+        <button mat-dialog-close type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="grids">
+
+        <div>
+            <img class="images" [src]="movie.movie_poster" alt="Movie Poster">
+        </div>
+
+    </div>
+    <div class="grids">
+        <div class="description">
+
+            <p><strong>Movie Tittle:</strong> {{ movie.movie_name }}</p>
+            <p><strong>Movie Categories:</strong> {{ movie.movie_categories }}</p>
+            <p><strong> Movie Time Duration-</strong> {{ movie.movie_timeduration }}</p>
+            <p><strong>Movie Director -</strong>{{ movie.movie_director }} </p>
+            <p><strong>Movie Description -</strong><br>{{ movie.movie_cast }} </p>
+
+
+
+        </div>
+    </div>
+</div>
+    </body>

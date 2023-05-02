@@ -1,0 +1,203 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+.mat-toolbar.mat-primary {
+  background: #006d9f;
+  color: #fff;
+}
+.username{
+  text-decoration: uppercase;
+}
+.tittle{
+text-align: center;
+padding-top: 30px;
+font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  overflow-y: scroll;
+}
+
+
+/* .leobutton{
+  margin-left: 15.5rem;
+}
+.interbutton{
+  margin-left: 18rem;
+}
+
+.leop{
+  margin-left: 15rem;
+} */
+/* .frame{
+ align-items: center;
+ margin-left: 35%;
+  margin-top: 70px;
+}
+.frame2{
+  margin-left: 25%;
+  align-items: center;
+  margin-top: 70px;
+}
+.frame3{
+  align-items: center;
+  margin-left: 25%;
+  margin-top: 70px;
+} */
+
+/* .image{
+  height: 100%;
+  max-height:320px;
+  align-items: center;
+  margin-left: 25%;
+ 
+}
+.image2{
+  height: 100%;
+  max-height: 230px;
+  align-items: center;
+  margin-left: 25%;
+}
+
+.image3{
+  height: 100%;
+  max-height:320px;
+  align-items: center;
+  margin-left: 25%;
+} */
+/* important */
+
+/* .image{
+margin-bottom: 20px;
+
+} */
+.image5{
+
+  height: 100%;
+  max-height:280px;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-left: 20%;
+  margin-top: -20px;
+}
+.logo{
+  height: 100%;
+  max-height:50px;
+  
+  /* background-color: rgba(255, 255, 255, 0.689); */
+  border-top-left-radius: 30px;
+border-top-right-radius: 30px;
+border-bottom-left-radius:30px ;
+border-bottom-right-radius:30px ;
+}
+
+.frame5{
+  /* max-height:280px; */
+  margin-left: 18%;
+  align-items: center;
+  margin-top: -10px;
+}
+.frame3{
+  margin-left: 16%;
+  max-height:280px;
+}
+
+.button5{
+  margin-left: 20rem;
+  
+}
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+/* .border {
+  border: 10px solid green;
+  
+} */
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  height: 52vh; 
+
+   background-color:   #023a71;
+
+  
+  align-items: center;
+}
+/* .grid1 {
+  
+  
+  padding: 20px;
+  
+  
+}
+
+.grid2 {
+  
+  
+  padding: 20px;
+  
+  
+} */
+.grid3{
+margin-left: 10rem;
+
+}
+
+/*  posters */
+.grid-container2 {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  background-color: #c1def8;
+  padding: 10px;
+}
+.grids{
+  
+  padding: 20px;
+  font-size: 30px;
+  
+  
+}
+.carousel-indicators li{
+  margin-bottom: 0rem;
+}
+
+.images{
+  height: 100%;
+  max-height:250px;
+  margin-left: 30%;
+ 
+}
+.buttons{
+  margin-left: 8rem;
+}
+.signout {
+  margin-left: 50px;
+}
+
+.addt  {
+  margin-right: 50px;
+}
+
+.addm  {
+  margin-right: 50px;
+}
+h1{
+  
+  font-weight: bold;
+  color: rgb(109, 109, 109);
+ font-size: large;
+  font-family: Verdana, sans-serif;
+  text-align: center;
+  margin-left: 70px;
+  
+  
+}

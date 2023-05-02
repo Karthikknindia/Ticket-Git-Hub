@@ -1,0 +1,25 @@
+<body>
+  <button mat-dialog-close type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  
+    <div class="container">
+      <div class="ticket1" *ngFor="let booking of bookings; let i=index">
+        <div>
+          <strong><p style="margin-top: 20px;">Ticket - {{ i+1 }}</p></strong>
+          <br>
+          <h1>{{ booking.booking_movie }}</h1>
+          <div>
+            <img class="image" [src]="booking.booking_poster">
+          </div>
+           <p>{{booking.booking_date}}</p>
+          <!-- <p>Date: {{ booking.booking_date }}</p>
+            <p>Theater: {{ booking.booking_theater }}</p>
+            <p>Showtime: {{ booking.booking_showtime }}</p> -->
+          <button (click)="ticket(booking)" class="button" mat-raised-button color="red">View Ticket</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+  

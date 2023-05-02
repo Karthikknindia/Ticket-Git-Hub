@@ -1,0 +1,632 @@
+
+
+<mat-toolbar color="primary">
+  
+  
+    <span>
+      <img class="logo" [src]="logo">
+      <strong style="color:rgb(255, 255, 255);margin-left: 5px;">Book Your Cinemas</strong>
+    </span>
+  
+    <span class="example-spacer"></span>
+    <!-- <button style="background-color: rgb(3, 3, 3); color: white;"  mat-raised-button (click)=" openTheatresForm(movie)">
+      Theatres
+    </button> -->
+  
+    <div mat-raised-actions style="padding: 30px;" align="center">
+     
+    </div>
+   
+  
+    <button style="background-color: rgb(248, 157, 0);  color: white;"  mat-raised-button (click)=" openBookings()">
+      My Bookings
+    </button>
+
+    <button (click)="logout()" class="signout" mat-raised-button >
+      Sign Out
+      {{username}}
+     </button>
+
+     <!-- <div  style="color: aliceblue;" *ngFor="let logins of logins">
+      <div class="contacts-row-details" (click)="populateForm(logins)">
+        
+        <span>{{logins.login_name}}</span>
+        
+       
+    
+    
+    
+      </div>
+    </div> -->
+     
+    
+      
+  </mat-toolbar>
+  
+
+ 
+
+
+
+  <!-- From Api -->
+  <!-- LEO -->
+    <ngb-carousel  class="carousel" [interval]="4000000">
+      <ng-template ngbSlide *ngFor="let movie of movies">
+        <div class="grid-container">
+          <div >
+            <div mat-raised-actions>
+              <button class="interbutton button5" style="margin-top: -30px;" mat-raised-button (click)="openTheatresForm(movie)"> {{ movie.movie_name }} - Book Tickets </button>
+            </div>
+            <br>
+            <div>
+              <img class="image image5" [src]="movie.movie_thumbnail">
+            </div>
+          </div>
+          <div >
+           
+            <!-- <iframe class="frame5" width="560" height="315" [src]="getSafeUrl(movie.movie_ytlink)"></iframe> -->
+            <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/dPIyS5R6lHU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+     
+
+          </div>
+
+        </div>
+      </ng-template>
+      
+    </ngb-carousel>
+    
+    
+      
+
+
+    <!-- list Movies -->
+
+    <div class="grid-container2">
+        <div class="grids" *ngFor="let movie of movies">
+          <div>
+            <h1 class="moviename">{{ movie.movie_name }}</h1>
+
+            <img class="images" [src]="movie.movie_poster">
+            <div>
+
+              <button class="buttons" style="margin-top: 20px;" mat-raised-button (click)="openTheatresForm(movie)">Book Tickets</button>
+            </div>
+
+          </div>
+          
+          
+        </div>
+      </div>
+
+
+
+
+       <!-- LEO -->
+  <!-- <ngb-carousel *ngIf="myimage">
+  
+    
+  
+    <ng-template ngbSlide >
+      
+      <div class="grid-container">
+        
+       
+        <div class="grid1 grid5">
+      
+      
+          <div mat-raised-actions>
+      
+            <button class="interbutton button5" style="margin-top: 10px;" mat-raised-button (click)=" openTheatresForm()"> Leo - Book Tickets </button>
+      
+          </div>
+      
+          <br>
+          <div>
+            <a href="https://www.youtube.com/watch?v=qN3wfuPYTI4" target="blank">
+              <img class="image image5" [src]="myimage">
+            </a>
+      
+          </div>
+          <div mat-dialog-content mat-raised-actions>
+            <p class="leop">  </p>
+          </div>
+      
+          <div>
+      
+          </div>
+        </div>
+        
+        <div class="grid1 "> 
+          
+          
+          <iframe class=" frame5"  width="560" height="315"
+          src="https://www.youtube.com/embed/qN3wfuPYTI4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+          gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+         
+        </div>
+       
+      </div >
+      </ng-template>
+    
+  
+  <ng-template ngbSlide>
+          
+    <div class="grid-container">
+  
+  
+      <div class="grid1 grid5">
+    
+    
+        <div mat-raised-actions>
+    
+          <button class="interbutton button5" style="margin-top: 10px;" mat-raised-button (click)=" openTheatresForm()"> Jailer - Book Tickets </button>
+    
+        </div>
+    
+        <br>
+        <div>
+          <a href="https://www.youtube.com/watch?v=qN3wfuPYTI4" target="blank">
+            <img class="image image5" [src]="jailer">
+          </a>
+    
+        </div>
+        <div mat-dialog-content mat-raised-actions>
+          <p class="leop">  </p>
+        </div>
+    
+        <div>
+    
+        </div>
+      </div>
+      
+      <div class="grid1 "> 
+        
+        
+        <iframe class=" frame5" width="560" height="315" src="https://www.youtube.com/embed/DObwdl3xB7U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+        clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+       
+      </div>
+     
+    </div >
+  </ng-template>
+  
+  
+ 
+      
+      <ng-template ngbSlide>
+          
+      <div class="grid-container">
+  
+  
+        <div class="grid1 grid5">
+      
+      
+          <div mat-raised-actions>
+      
+            <button class="interbutton button5" style="margin-top: 10px;" mat-raised-button (click)=" openTheatresForm()"> Interstellar - Book Tickets </button>
+      
+          </div>
+      
+          <br>
+          <div>
+            <a href="https://www.youtube.com/watch?v=qN3wfuPYTI4" target="blank">
+              <img class="image image5" [src]="myimage2">
+            </a>
+      
+          </div>
+          <div mat-dialog-content mat-raised-actions>
+            <p class="leop">  </p>
+          </div>
+      
+          <div>
+      
+          </div>
+        </div>
+        
+        <div class="grid1 "> 
+          
+          
+          <iframe class="frame5"  width="560" height="315" src="https://www.youtube.com/embed/zSWdZVtXT7E" title="YouTube video player" 
+          frameborder="0" allow="accelerometer; 
+          autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+         
+        </div>
+       
+      </div >
+      </ng-template>
+      
+    
+    <ng-template ngbSlide>
+          
+      <div class="grid-container">
+  
+  
+        <div class="grid1 grid5">
+      
+      
+          <div mat-raised-actions>
+      
+            <button class="interbutton button5" style="margin-top: 10px;" mat-raised-button (click)=" openTheatresForm()"> Avengers - Book Tickets </button>
+      
+          </div>
+      
+          <br>
+          <div>
+            <a href="https://www.youtube.com/watch?v=qN3wfuPYTI4" target="blank">
+              <img class="image3 image5" [src]="myimage3">
+            </a>
+      
+          </div>
+          <div mat-dialog-content mat-raised-actions>
+            <p class="leop">  </p>
+          </div>
+      
+          <div>
+      
+          </div>
+        </div>
+        
+        <div class="grid1 "> 
+          
+          
+          <iframe class=" frame5" width="560" height="315" src="https://www.youtube.com/embed/gonAaBYuB-g" title="YouTube video player" 
+          frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; 
+          web-share" allowfullscreen></iframe>
+         
+        </div>
+       
+      </div >
+      </ng-template>
+  
+ 
+  
+  <ng-template ngbSlide>
+          
+    <div class="grid-container">
+  
+  
+      <div class="grid1 grid5">
+    
+    
+        <div mat-raised-actions>
+    
+          <button class="interbutton button5" style="margin-top: 10px;" mat-raised-button (click)=" openTheatresForm()"> GOT - Book Tickets </button>
+    
+        </div>
+    
+        <br>
+        <div>
+          
+            <img class="image3 image5" [src]="myimage4">
+          
+    
+        </div>
+        <div mat-dialog-content mat-raised-actions>
+          <p class="leop">  </p>
+        </div>
+    
+        <div>
+    
+        </div>
+      </div>
+      
+      <div class="grid1"> 
+        
+        
+        <iframe class=" frame5" width="560" height="315" src="https://www.youtube.com/embed/rlR4PJn8b8I" title="YouTube video player" 
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen></iframe>
+       
+      </div>
+     
+    </div >
+  </ng-template>
+  
+  
+  <ng-template ngbSlide>
+          
+    <div class="grid-container">
+  
+  
+      <div class="grid1 grid5">
+    
+    
+        <div mat-raised-actions>
+    
+          <button class="interbutton button5" style="margin-top: 10px;" mat-raised-button (click)=" openTheatresForm()"> DIA - Book Tickets </button>
+    
+        </div>
+    
+        <br>
+        <div>
+          <a href="https://www.youtube.com/watch?v=qN3wfuPYTI4" target="blank">
+            <img class="image image5" [src]="dia">
+          </a>
+    
+        </div>
+        <div mat-dialog-content mat-raised-actions>
+          <p class="leop">  </p>
+        </div>
+    
+        <div>
+    
+        </div>
+      </div>
+      
+      <div class="grid1 "> 
+        
+        
+        <iframe class="frame5" width="560" height="315" src="https://www.youtube.com/embed/8GR-W0jGVak" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+        clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+       
+      </div>
+     
+    </div >
+  </ng-template>
+  
+  
+  
+  <ng-template ngbSlide>
+          
+    <div class="grid-container">
+  
+  
+      <div class="grid1 grid5">
+    
+    
+        <div mat-raised-actions>
+    
+          <button class="interbutton button5" style="margin-top: 10px;" mat-raised-button (click)=" openTheatresForm()"> Maaveran - Book Tickets </button>
+    
+        </div>
+    
+        <br>
+        <div>
+          <a href="https://www.youtube.com/watch?v=qN3wfuPYTI4" target="blank">
+            <img class="image image5" [src]="maaveran">
+          </a>
+    
+        </div>
+        <div mat-dialog-content mat-raised-actions>
+          <p class="leop">  </p>
+        </div>
+    
+        <div>
+    
+        </div>
+      </div>
+      
+      <div class="grid1 "> 
+        
+        
+        <iframe class=" frame5" width="560" height="315" src="https://www.youtube.com/embed/v_5NBJ2Urxo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
+         clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+       
+      </div>
+     
+    </div >
+  </ng-template>
+  
+  
+  <ng-template ngbSlide>
+          
+    <div class="grid-container">
+  
+  
+      <div class="grid1 grid5">
+    
+    
+        <div mat-raised-actions>
+    
+          <button class="interbutton button5" style="margin-top: 10px;" mat-raised-button (click)=" openTheatresForm()"> Hridhayam - Book Tickets </button>
+    
+        </div>
+    
+        <br>
+        <div>
+          <a href="https://www.youtube.com/watch?v=qN3wfuPYTI4" target="blank">
+            <img class="image image5" [src]="hridhayam">
+          </a>
+    
+        </div>
+        <div mat-dialog-content mat-raised-actions>
+          <p class="leop">  </p>
+        </div>
+    
+        <div>
+    
+        </div>
+      </div>
+      
+      <div class="grid1 "> 
+        
+        
+        <iframe class=" frame5" width="560" height="315" src="https://www.youtube.com/embed/C2FU7fj0IQc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+        clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+       
+      </div>
+     
+    </div >
+  </ng-template>
+  
+  </ngb-carousel> -->
+
+  
+  
+  <!-- list Movies -->
+  
+  <!-- <div class="grid-container2">
+    <div class="grids">
+      
+      
+      <h1>Leo</h1>
+  
+      
+      <div>
+        
+          <img class="images" [src]="leoposter">
+        
+  
+      </div>
+      
+      <div mat-raised-actions>
+  
+        <button class="buttons" style="margin-top: 20px;" mat-raised-button (click)=" openTheatresForm()">Book Tickets </button>
+  
+      </div>
+  
+      </div>
+  
+     
+      <div class="grids">
+      
+      
+        <h1>Interstellar</h1>
+    
+        
+        <div>
+         
+            <img class="images" [src]="interposter">
+          
+    
+        </div>
+  
+        <div mat-raised-actions>
+    
+          <button class="buttons" style="margin-top: 20px;" mat-raised-button (click)=" openTheatresForm()"> Book Tickets </button>
+    
+        </div>
+        </div>
+  
+        
+        <div class="grids">
+      
+      
+          <h1>Avengers</h1>
+      
+          
+          <div>
+            
+              <img class="images" [src]="avengerposter">
+            
+      
+          </div>
+  
+          <div mat-raised-actions>
+      
+            <button class="buttons" style="margin-top: 20px;" mat-raised-button (click)=" openTheatresForm()"> Book Tickets </button>
+      
+          </div>
+          </div>
+  
+          
+  
+          <div class="grids">
+      
+      
+            <h1>Game Of Thrones</h1>
+        
+            
+            <div>
+              
+                <img class="images" [src]="gameofthrones">
+              
+        
+            </div>
+    
+            <div mat-raised-actions>
+        
+              <button class="buttons" style="margin-top: 20px;" mat-raised-button (click)=" openTheatresForm()"> Book Tickets </button>
+        
+            </div>
+            </div>
+     
+  </div> -->
+  <!-- Copy -->
+  <!-- <div class="grid-container2">
+    <div class="grids">
+      
+     
+      <h1>Dia</h1>
+  
+      
+      <div>
+        
+          <img class="images" [src]="diaposter">
+        
+  
+      </div>
+      
+      <div mat-raised-actions>
+  
+        <button class="buttons" style="margin-top: 20px;" mat-raised-button (click)=" openTheatresForm()">Book Tickets </button>
+  
+      </div>
+  
+      </div>
+  
+      
+      <div class="grids">
+      
+      
+        <h1>Maaveran</h1>
+    
+        
+        <div>
+         
+            <img class="images" [src]="maaveranposter">
+          
+    
+        </div>
+  
+        <div mat-raised-actions>
+    
+          <button class="buttons" style="margin-top: 20px;" mat-raised-button (click)=" openTheatresForm()"> Book Tickets </button>
+    
+        </div>
+        </div>
+  
+       
+        <div class="grids">
+      
+      
+          <h1>Hridhayam</h1>
+      
+          
+          <div>
+            
+              <img class="images" [src]="hridhayamposter">
+            
+      
+          </div>
+  
+          <div mat-raised-actions>
+      
+            <button class="buttons" style="margin-top: 20px;" mat-raised-button (click)=" openTheatresForm()"> Book Tickets </button>
+      
+          </div>
+          </div>
+  
+         
+          <div class="grids">
+      
+      
+            <h1>Jailer</h1>
+        
+            
+            <div>
+              
+                <img class="images" [src]="jailerposter">
+              
+        
+            </div>
+    
+            <div mat-raised-actions>
+        
+              <button class="buttons" style="margin-top: 20px;" mat-raised-button (click)=" openTheatresForm()"> Book Tickets </button>
+        
+            </div>
+            </div>
+     
+  </div> -->
+  

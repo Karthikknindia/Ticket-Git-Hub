@@ -1,0 +1,31 @@
+
+body{
+  height: 80vh;
+  width: 45vw;
+  
+}
+h1{
+  text-align: center;
+}
+.input{
+ 
+  margin-left: 12%;
+ 
+}
+.container{
+  display: grid;
+  grid-template-columns: auto auto;
+  margin-top: 3rem;
+}
+.button{
+  float: right;
+  margin-top: 2rem;
+  margin-right:10rem;
+}
+.close{
+  position:absolute;
+margin-top: 2rem;
+margin-left:12rem;
+
+
+}

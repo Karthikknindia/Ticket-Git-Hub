@@ -1,0 +1,62 @@
+<body>
+    <table mat-table  [dataSource]="dataSource" matSort class="mat-elevation-z8" >
+      
+      
+      
+    
+      
+       
+        
+        <ng-container matColumnDef="sno">
+          <th mat-header-cell *matHeaderCellDef> Sno. </th>
+          <td mat-cell *matCellDef="let booking; let i=index">{{i+1}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="booking_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
+            <td mat-cell *matCellDef="let booking"> {{booking.booking_name}} </td>
+          </ng-container>
+           
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        <ng-container matColumnDef="booking_movie">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Movie </th>
+          <td mat-cell *matCellDef="let booking"> {{booking.booking_movie}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="booking_seats">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Seats </th>
+            <td mat-cell *matCellDef="let booking"> {{booking.booking_seats}} </td>
+          </ng-container>
+          <ng-container matColumnDef="booking_email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let booking"> {{booking.booking_email}} </td>
+          </ng-container>
+          <ng-container matColumnDef="booking_date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date & Time </th>
+            <td mat-cell *matCellDef="let booking"> {{booking.booking_date}},{{booking.booking_showtime}} </td>
+          </ng-container>
+
+      
+       
+      
+      
+       
+      
+     
+    
+      </table>
+     
+      <button class="close" mat-raised-button mat-dialog-close="" color="warn">Cancel</button>
+     
+    
+      <mat-paginator [length]="100"
+      [pageSize]="5"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page">
+      
+      
+      </mat-paginator>
+    </body>

@@ -1,0 +1,14 @@
+body{
+    width: 95vh;
+  }
+ .close{
+    display: flex;
+bottom: 0;
+right: 0;
+margin-left: 35rem;
+    margin-top: 2rem;
+    
+ }
+*{
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}

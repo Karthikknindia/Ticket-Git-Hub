@@ -1,0 +1,49 @@
+<body>
+<table mat-table  [dataSource]="dataSource"matSort class="mat-elevation-z8" >
+  
+  
+  
+
+  
+   
+    <!-- <ng-container matColumnDef="theater_id" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Theater ID </th>
+      <td mat-cell *matCellDef="let theater"> {{theater.theater_id}} </td>
+    </ng-container> -->
+    <ng-container matColumnDef="sno">
+      <th mat-header-cell *matHeaderCellDef> Sno. </th>
+      <td mat-cell *matCellDef="let movie; let i=index">{{i+1}}</td>
+    </ng-container>
+    <ng-container matColumnDef="theater_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Theater Name </th>
+      <td mat-cell *matCellDef="let theater"> {{theater.theater_name}} </td>
+    </ng-container>
+  
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+  
+   
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+    <td mat-cell *matCellDef="let theater, let row"> 
+      <button (click)="updateTheater(row)" class="button"><mat-icon aria-hidden="false" aria-label="Example edit icon" fontIcon="edit"></mat-icon></button>
+      <button (click)="deletetheater(theater.theater_id)" class="button">
+          <mat-icon aria-hidden="false" aria-label="Example delete icon" fontIcon="delete"></mat-icon>
+        </button>
+        <button (click)=" viewtheater(row)"  class="button"><mat-icon aria-hidden="false" aria-label="Example visibility icon" fontIcon="visibility"></mat-icon></button></td>
+  </ng-container>
+ 
+
+  </table>
+  <button mat-raised-button (click)=" addtheater()">
+    Add Theater
+  </button>
+  <button class="close" mat-raised-button mat-dialog-close="" color="primary">Cancel</button>
+ 
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25]"
+  [pageSize]="5" [length]="theaters.length">
+ </mat-paginator>
+</body>
