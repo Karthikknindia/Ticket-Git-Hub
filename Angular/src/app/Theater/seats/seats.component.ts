@@ -147,7 +147,7 @@ export class SeatsComponent {
   getalltheaters() {
    
     
-    this.theaterservice.getalltheaters()
+    this.theaterservice.getalltheaters(this.theater)
 
       .subscribe(
         response => {

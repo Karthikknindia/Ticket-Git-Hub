@@ -52,7 +52,7 @@ export class AddtheatorComponent {
   }
   getalltheaters() {
     console.log(this.theater.theater_name)
-    this.theaterservice.getalltheaters()
+    this.theaterservice.getalltheaters(this.theater)
 
       .subscribe(
         response => {

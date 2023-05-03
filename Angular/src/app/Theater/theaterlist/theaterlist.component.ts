@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { theaters } from 'src/app/models/theaters.model';
 import { TheaterserviceService } from 'src/app/service/theaterservice.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 export interface PeriodicElement {
   
   name: string;
@@ -65,7 +66,7 @@ export class TheaterlistComponent implements OnInit  {
   
 
 
-  constructor(private _dialog:MatDialog,private theaterservice:TheaterserviceService,public dialogRef: MatDialogRef<TheaterlistComponent> ){
+  constructor(private _dialog:MatDialog,private theaterservice:TheaterserviceService,private _snackBar: MatSnackBar,public dialogRef: MatDialogRef<TheaterlistComponent> ){
 
   }
   applyFilter(event: Event) {
@@ -75,7 +76,7 @@ export class TheaterlistComponent implements OnInit  {
 
   getalltheaters(){
     console.log(this.theater.theater_name)
-    this.theaterservice.getalltheaters()
+    this.theaterservice.getalltheaters(this.theater)
     
     .subscribe(
       response=>{
@@ -114,6 +115,7 @@ export class TheaterlistComponent implements OnInit  {
     .subscribe(
        (deletetheater: boolean) => {
           if (deletetheater) {
+            this._snackBar.open('Deleted successful.', 'OK', { duration: 3000 });
              this.theaterservice.deletetheater(theater_id)
              .subscribe(
                 response=>{

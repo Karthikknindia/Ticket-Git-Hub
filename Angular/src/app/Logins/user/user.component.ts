@@ -165,7 +165,7 @@ this.updateuser();
         localStorage.removeItem('token');
         const loginid = sessionStorage.getItem('loginid');
         if (loginid !== null) {
-            this.LoginService.updateuser(Number(loginid)).subscribe(
+            this.LoginService.logout(Number(loginid)).subscribe(
                 response => {
                     this.login = response;
                     console.log(response);

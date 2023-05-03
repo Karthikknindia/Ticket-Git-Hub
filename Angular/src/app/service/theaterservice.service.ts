@@ -13,14 +13,14 @@ export class TheaterserviceService {
   baseUrl='https://localhost:44304/api/Theater';
   constructor(private http: HttpClient) { }
 
-  getalltheaters(): Observable<theaters[]>{
-    return this.http.get<theaters[]>(this.baseUrl);
+  getalltheaters(theaters:theaters): Observable<theaters[]>{
+    return this.http.post<theaters[]>("https://localhost:44304/api/Theater/GetAlltheaters",theaters);
   }
   adduser(theaters: theaters): Observable<any>{
    
     theaters.theater_id = 0;
     console.log(theaters);
-    return this.http.post<theaters>(this.baseUrl, theaters);
+    return this.http.post<theaters>("https://localhost:44304/api/Theater/AddTheater", theaters);
   }
 
   deletetheater(theater_id: number) : Observable<theaters>{
@@ -30,12 +30,12 @@ export class TheaterserviceService {
   getTheaterById(theater_id:number): Observable<theaters> {
    
    
-    return this.http.get<theaters>("https://localhost:44304/api/Theater/" + theater_id);
+    return this.http.post<theaters>("https://localhost:44304/api/Theater/" , theater_id);
   }
   
   updateTheater(theaters: theaters): Observable<any> {
     
    
-    return this.http.put<theaters>("https://localhost:44304/api/Theater/",theaters);
+    return this.http.post<theaters>("https://localhost:44304/api/Theater/UpdateTheater",theaters);
   }
 }

@@ -142,7 +142,7 @@ export class TheatresComponent {
   getalltheaters() {
    
     
-    this.theaterservice.getalltheaters()
+    this.theaterservice.getalltheaters(this.theater)
 
       .subscribe(
         response => {

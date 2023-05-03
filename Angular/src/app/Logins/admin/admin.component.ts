@@ -18,6 +18,7 @@ import { logins } from 'src/app/models/logins.model';
 import { movies } from 'src/app/models/movies.model';
 import { MovieserviceService } from 'src/app/service/movieservice.service';
 import { LoginService } from 'src/app/service/login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin',
@@ -66,7 +67,7 @@ movie:movies={
   userEmail:any;
   loginid:any;
 
-  constructor(private _dialog:MatDialog,private LoginService: LoginService,private router: Router,private movieservice:MovieserviceService,private sanitizer: DomSanitizer,private cdr: ChangeDetectorRef){
+  constructor(private _dialog:MatDialog,private LoginService: LoginService,private router: Router,private movieservice:MovieserviceService,private sanitizer: DomSanitizer,private cdr: ChangeDetectorRef,private _snackBar: MatSnackBar){
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     
   }
@@ -150,7 +151,9 @@ movie:movies={
     .subscribe(
        (deletemovie: boolean) => {
           if (deletemovie) {
+            this._snackBar.open('Deleted successful.', 'OK', { duration: 3000 });
              this.movieservice.deletemovie(movie_id)
+             
              .subscribe(
                 response=>{
                    this.getallmovies();
@@ -195,7 +198,7 @@ movie:movies={
     
     if (loginid !== null) {
       
-        this.LoginService.updateuser(Number(loginid)).subscribe(
+        this.LoginService.logout(Number(loginid)).subscribe(
             response => {
                 this.login = response;
                 console.log(response);
