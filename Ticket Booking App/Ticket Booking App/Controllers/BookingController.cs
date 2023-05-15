@@ -1,83 +1,139 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Ticket_Booking_App.Data.Repository;
 using Ticket_Booking_App.Models;
 
 namespace Ticket_Booking_App.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class BookingController : Controller
     {
 
         private readonly IBookingRepository _bookingRepository;
-        public BookingController(IBookingRepository bookingRepository)
+        private readonly IJWTManagerRepository _jWTManager;
+        private readonly IErrorRepository _error;
+        public BookingController(IBookingRepository bookingRepository, IJWTManagerRepository jWTManager, IErrorRepository error)
         {
             this._bookingRepository = bookingRepository;
+            this._jWTManager = jWTManager;
+            this._error = error;
         }
 
         [EnableCors("AllowOrigin")]
-        [HttpGet]
-
+        [HttpPost]
+        [Route("GetAllBooking")]
         public async Task<IActionResult> GetAllAsync()
         {
-            var data = await _bookingRepository.GetAllAsync();
-           
-            return Ok(data);
+
+
+            try
+            {
+                var data = await _bookingRepository.GetAllAsync();
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+
+                var error = new Error { Message = ex.Message, StackTrace = ex.StackTrace, Timestamp = DateTime.Now };
+
+
+                await _error.AddError(error);
+
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.StackTrace);
+            }
 
 
         }
+
+
         [HttpPost]
+        [Route("AddBooking")]
         public async Task<IActionResult> Booking([FromBody] Booking booking)
         {
-            if (booking != null)
+            try
             {
-                booking.booking_status = "success";
-                var data = await _bookingRepository.AddAsync(booking);
-                if (data != null)
+
+
+                if (booking != null)
                 {
-                    return Ok(new
+                    booking.booking_status = "success";
+                    var data = await _bookingRepository.AddAsync(booking);
+                    if (data != null)
                     {
-                        status = "200",
-                        message = "success",
-                        data = new
+                        return Ok(new
                         {
-                            data
-                        }
-                    });
+                            status = "200",
+                            message = "success",
+                            data = new
+                            {
+                                data
+                            }
+                        });
+                    }
+                    else
+                    {
+                        return Ok(new
+                        {
+                            status = "404",
+                            message = "Not Found",
+
+                        });
+                    }
+
+
                 }
+
                 else
                 {
-                    return Ok(new
-                    {
-                        status = "404",
-                        message = "Not Found",
-
-                    });
+                    return NoContent();
                 }
-
-
             }
-            else
+            catch (Exception ex)
             {
-                return NoContent();
+
+                var error = new Error { Message = ex.Message, StackTrace = ex.StackTrace, Timestamp = DateTime.Now };
+
+
+                await _error.AddError(error);
+
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.StackTrace);
+                //throw;
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("getbyname")]
         public async Task<IActionResult> GetByNameAsync(string username)
         {
-            var data = await _bookingRepository.GetAllAsync();
-            if (!string.IsNullOrEmpty(username))
+            try
             {
-                data = data.Where(x => x.booking_name.ToLower() == username.ToLower()).ToList();
+
+
+                var data = await _bookingRepository.GetAllAsync();
+                if (!string.IsNullOrEmpty(username))
+                {
+                    data = data.Where(x => x.booking_name.ToLower() == username.ToLower()).ToList();
+                }
+                return Ok(data);
             }
-            return Ok(data);
+            catch (Exception ex)
+            {
+
+                var error = new Error { Message = ex.Message, StackTrace = ex.StackTrace, Timestamp = DateTime.Now };
+
+
+                await _error.AddError(error);
+
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.StackTrace);
+            }
         }
 
-    
 
-     
+
+
     }
 }

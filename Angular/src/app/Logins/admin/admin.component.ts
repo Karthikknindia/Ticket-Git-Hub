@@ -66,6 +66,7 @@ movie:movies={
   username:any;
   userEmail:any;
   loginid:any;
+  token: any;
 
   constructor(private _dialog:MatDialog,private LoginService: LoginService,private router: Router,private movieservice:MovieserviceService,private sanitizer: DomSanitizer,private cdr: ChangeDetectorRef,private _snackBar: MatSnackBar){
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -76,22 +77,23 @@ movie:movies={
     return this.sanitizer.bypassSecurityTrustResourceUrl(link);
   }
   ngOnInit(): void {
-   
+    // localStorage.removeItem('isLoggedIn');
     this.getallmovies();
     this.updateuser();
     this.username=sessionStorage.getItem('username');
     this.userEmail=sessionStorage.getItem('userEmail');
     this.loginid=sessionStorage.getItem('loginid');
+    this.token=sessionStorage.getItem('token');
   }
  
   getallmovies(){
     console.log(this.movie.movie_name)
     this.movieservice.getallmovies(this.movie)
-
+    
     .subscribe(
       response=>{
         this.movies=response;
-        console.log(response)
+        
       }
     )
   }
@@ -207,6 +209,7 @@ movie:movies={
             
         );
         this.router.navigate(['/login']);
+        
     } else {
         console.log('Login ID is null');
     }
@@ -222,4 +225,16 @@ movie:movies={
       }
     )
   }
+
+  tokens(){
+    const token = sessionStorage.getItem('token') ?? '';
+    this.LoginService.token()
+      .subscribe(
+        response=>{
+          this.token=response;
+          console.log(response);
+        }
+      );
+  }
+  
 }

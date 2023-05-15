@@ -17,9 +17,20 @@ Truncate table tbl_theater
 Truncate table tbl_movies
 
 truncate table tbl_booking
+truncate table tbl_token
 
 
 drop procedure sp_update_theater
+
+
+ALTER Procedure sp_insert_error (@Message nvarchar(max),@StackTrace nvarchar(max),@Timestamp Datetime)
+as
+begin
+insert into tbl_error values (@Message,@StackTrace,@Timestamp)
+end
+
+
+
 
 
 
@@ -44,21 +55,28 @@ END
 
 
 
+--alter PROCEDURE sp_update_login_status
+--    @login_id INT,
+--    @login_status nvarchar(50) = 'online'
+--AS
+--BEGIN
+--    DECLARE @current_status nvarchar(50)
+--    SELECT @current_status = login_status FROM tbl_login WHERE login_id = @login_id
+--    IF (@current_status = 'online')
+--    BEGIN
+--        SET @login_status = 'offline'
+--    END
+--    UPDATE tbl_login SET login_status = @login_status WHERE login_id = @login_id
+--END
+
+
 alter PROCEDURE sp_update_login_status
     @login_id INT,
-    @login_status nvarchar(50) = 'online'
+    @login_status VARCHAR(50) = 'online'
 AS
 BEGIN
-    DECLARE @current_status nvarchar(50)
-    SELECT @current_status = login_status FROM tbl_login WHERE login_id = @login_id
-    IF (@current_status = 'online')
-    BEGIN
-        SET @login_status = 'offline'
-    END
     UPDATE tbl_login SET login_status = @login_status WHERE login_id = @login_id
 END
-
-
 
 
 
@@ -113,6 +131,35 @@ insert into tbl_movies values (@movie_name,@movie_categories,@movie_theater,@mov
 end
 
 
+
+
+CREATE PROCEDURE sp_get_movies
+AS
+BEGIN
+    SELECT * FROM tbl_movies WHERE movie_status <> 'deleted'
+END
+
+CREATE PROCEDURE sp_get_movies_by_id
+@movie_id INT
+as
+begin
+SELECT * FROM tbl_movies WHERE movie_id = @movie_id
+end
+
+
+
+
+CREATE PROCEDURE sp_delete_movie
+    @movie_id INT
+AS
+BEGIN
+    UPDATE tbl_movies
+    SET movie_status = 'deleted'
+    WHERE movie_id = @movie_id
+END
+
+
+
 ALTER PROCEDURE sp_update_movies
     @movie_id INT,
     @movie_name NVARCHAR(50),
@@ -161,6 +208,35 @@ begin
 insert into tbl_theater values (@theater_name,@theater_capacity,@theater_location,@theater_screen,@theater_status,@theater_datetime,@theater_createdate,@theater_updatedate)
 end
 
+
+
+CREATE PROCEDURE sp_delete_theater
+    @theater_id INT
+AS
+BEGIN
+    UPDATE tbl_theater
+    SET theater_status = 'deleted'
+    WHERE theater_id = @theater_id
+END
+
+
+CREATE PROCEDURE sp_get_all_theaters
+AS
+BEGIN
+    SELECT * 
+    FROM tbl_theater 
+    WHERE theater_status <> 'deleted'
+END
+
+
+CREATE PROCEDURE get_theater_by_id
+    @theater_id INT
+AS
+BEGIN
+    SELECT * 
+    FROM tbl_theater 
+    WHERE theater_id = @theater_id
+END
 
 
 
@@ -232,3 +308,58 @@ AS
 BEGIN
     SELECT * FROM tbl_booking
 END
+
+----------------------------------------------------------------Token-------------------------------------------------------------------------
+--alter PROCEDURE sp_insert_token (@token nvarchar(50), @login_name nvarchar(50),@token_status nvarchar(50)  )
+--as
+--begin
+--insert into tbl_token values (@token,@login_name,@token_status)
+--end
+
+truncate table tbl_token
+
+ALTER PROCEDURE sp_insert_token 
+ 
+  @login_name nvarchar(MAX),
+   @token nvarchar(MAX), 
+  @token_status nvarchar(MAX),
+  @user_status nvarchar(50),
+  @token_createddate datetime,
+  @expiration_date datetime
+AS
+BEGIN
+  INSERT INTO tbl_token values (@login_name,@token,  @token_status, @user_status,@token_createddate,@expiration_date)
+END
+
+
+
+
+
+alter PROCEDURE sp_update_token_status
+@token nvarchar(MAX),
+    @user_status nvarchar(MAX)
+	
+AS
+BEGIN
+    UPDATE tbl_token
+    SET user_status = @user_status
+	WHERE token=@token
+END
+
+
+--ALTER PROCEDURE sp_update_token_status
+--@token nvarchar(MAX),
+--@user_status nvarchar(MAX),
+--@token_status nvarchar(max)
+--AS
+--BEGIN
+--    UPDATE tbl_token
+--    SET user_status = @user_status,
+--        token_status = CASE 
+--                            WHEN DATEDIFF(minute, token_createddate, GETDATE()) >= 10 THEN 'expired'
+--                            ELSE @token_status
+--                        END
+--    WHERE token = @token
+--END
+
+

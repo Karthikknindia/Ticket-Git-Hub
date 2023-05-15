@@ -50,28 +50,28 @@ namespace Ticket_Booking_App.Data.Repository
             }
 
         }
-      
 
-        //public async  Task<ResponseModel> DeleteAsync(int login_id)
-        //{
-        //    var sql = "sp_update_login_status_offline";
-           
-        //    {
 
-        //        var result = await _con.QueryAsync(sql, new
+        public async Task<ResponseModel> DeleteAsync(int login_id)
+        {
+            var sql = "sp_update_login_status_offline";
 
-        //        {
-        //            @login_id = login_id,
+            {
 
-        //        },
-        //       commandType: CommandType.StoredProcedure);
+                var result = await _con.QueryAsync(sql, new
 
-        //        return new ResponseModel
-        //        {
-        //            SuccessMessage = "updated to offline"
-        //        };
-        //    }
-        //}
+                {
+                    @login_id = login_id,
+
+                },
+               commandType: CommandType.StoredProcedure);
+
+                return new ResponseModel
+                {
+                    SuccessMessage = "updated to offline"
+                };
+            }
+        }
 
         public async Task<ResponseModel> AddAsync(Login model)
         {
@@ -83,7 +83,7 @@ namespace Ticket_Booking_App.Data.Repository
                     @login_name= model.login_name,
                     @login_email = model.login_email,
                     @login_password = model.login_password,
-                    @login_createdate = model.login_createdate,
+                    @login_createdate = DateTime.Now,
                     @login_status=model.login_status,
                     @login_usertype=model.login_usertype,
 
@@ -120,6 +120,10 @@ namespace Ticket_Booking_App.Data.Repository
 
         }
 
-        
+        public T GetValue<T>(string key)
+        {
+            var value = configuration.GetValue<T>(key);
+            return value;
+        }
     }
 }

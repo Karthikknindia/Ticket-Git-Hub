@@ -34,25 +34,32 @@ namespace Ticket_Booking_App.Data.Repository
                 @movie_cast = model.movie_cast,
                 @movie_thumbnail = model.movie_thumbnail,
                 @movie_ytlink= model.movie_ytlink,
-                @movie_createdate = model.movie_createdate,
-                @movie_updatedate = model.movie_updatedate
+                @movie_createdate = DateTime.Now,
+                @movie_updatedate = DateTime.Now
             }, commandType: CommandType.StoredProcedure);
 
             return new ResponseModel
             {
-                Data = result
+                Data = result,
+                SuccessMessage = "Added"
             };
         }
 
         public async Task<ResponseModel> DeleteAsync(int movie_id)
         {
-            var sql = "UPDATE tbl_movies SET movie_status = 'deleted' WHERE movie_id = @movie_id";
+            var sql = "sp_delete_movie";
 
             {
 
-                var result = await _con.ExecuteAsync(sql, new { movie_id = movie_id });
+                var result = await _con.ExecuteAsync(sql, new 
+                {
+                    @movie_id = movie_id 
+                }, commandType: CommandType.StoredProcedure);
+
+
                 return new ResponseModel
                 {
+                    Data = result,
                     SuccessMessage = "Deleted"
                 };
             }
@@ -60,7 +67,7 @@ namespace Ticket_Booking_App.Data.Repository
 
         public async Task<IReadOnlyList<Movies>> GetAllAsync()
         {
-            var sql = "SELECT * FROM tbl_movies WHERE movie_status <> 'deleted'";
+            var sql = "sp_get_movies";
             {
 
                 var result = await _con.QueryAsync<Movies>(sql);
@@ -70,14 +77,21 @@ namespace Ticket_Booking_App.Data.Repository
 
         public async Task<ResponseModel>GetByIdAsync(int id)
         {
-            var sql = "SELECT * FROM tbl_movies WHERE movie_id = @movie_id";
+            var sql = "sp_get_movies_by_id";
 
             {
                 //_con.Open();
-                var result = await _con.QuerySingleOrDefaultAsync<Movies>(sql, new { @movie_id = id });
+                var result = await _con.QuerySingleOrDefaultAsync<Movies>(sql, new
+                {
+                    @movie_id = id 
+                }, 
+                commandType: CommandType.StoredProcedure);
+
+
                 return new ResponseModel
                 {
-                    Data = result
+                    Data = result,
+                    SuccessMessage = "Results are Get By Id"
                 };
             }
         }
@@ -90,7 +104,7 @@ namespace Ticket_Booking_App.Data.Repository
 
                 var result = await _con.QueryAsync(sql, new
                 {
-                    @movie_id=model.movie_id,
+                    @movie_id = model.movie_id,
                     @movie_name = model.movie_name,
                     @movie_categories = model.movie_categories,
                     @movie_theater = model.movie_theater,
@@ -102,18 +116,20 @@ namespace Ticket_Booking_App.Data.Repository
                     @movie_cast = model.movie_cast,
                     @movie_thumbnail = model.movie_thumbnail,
                     @movie_ytlink = model.movie_ytlink,
-                    @movie_createdate = model.movie_createdate,
-                    @movie_updatedate = model.movie_updatedate,
+                    @movie_createdate = DateTime.Now,
+                    @movie_updatedate = DateTime.Now,
 
 
                 }, commandType: CommandType.StoredProcedure);
 
 
-            }
-            return new ResponseModel
-            {
 
-            };
+                return new ResponseModel
+                {
+                    Data = result,
+                    SuccessMessage = "Updated"
+                };
+            }
         }
     }
 }

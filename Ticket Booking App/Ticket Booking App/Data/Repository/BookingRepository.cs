@@ -44,26 +44,7 @@ namespace Ticket_Booking_App.Data.Repository
             return model;
         }
 
-        public async Task<ResponseModel> DeleteAsync(int id)
-        {
-            
-                var sql = "sp_delete_booking_by_id";
-
-                var result = await _con.QuerySingleOrDefaultAsync<Booking>(sql);
-
-               
-                if (result != null && result.booking_createdate < DateTime.UtcNow)
-                {
-                    result.booking_status = "expired";
-                }
-
-                return new ResponseModel
-                {
-                    Data = result
-                };
-            
-
-        }
+       
 
         public async Task<IReadOnlyList<Booking>> GetAllAsync()
         {
@@ -75,23 +56,54 @@ namespace Ticket_Booking_App.Data.Repository
             }
         }
 
-        public async Task<ResponseModel> GetByIdAsync(int id)
-        {
-            var sql = "sp_insert_booking_by_id";
 
-            {
-                
-                var result = await _con.QuerySingleOrDefaultAsync<Booking>(sql);
-                return new ResponseModel
-                {
-                    Data = result
-                };
-            }
-        }
 
-        public Task<ResponseModel> UpdateAsync(Booking model)
-        {
-            throw new NotImplementedException();
-        }
+
+
+
+
+        //public async Task<ResponseModel> GetByIdAsync(int id)
+        //{
+        //    var sql = "sp_insert_booking_by_id";
+
+        //    {
+
+        //        var result = await _con.QuerySingleOrDefaultAsync<Booking>(sql);
+        //        return new ResponseModel
+        //        {
+        //            Data = result
+        //        };
+        //    }
+        //}
+
+
+
+        //public Task<ResponseModel> UpdateAsync(Booking model)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+
+
+        //public async Task<ResponseModel> DeleteAsync(int id)
+        //{
+
+        //        var sql = "sp_delete_booking_by_id";
+
+        //        var result = await _con.QuerySingleOrDefaultAsync<Booking>(sql);
+
+
+        //        if (result != null && result.booking_createdate < DateTime.UtcNow)
+        //        {
+        //            result.booking_status = "expired";
+        //        }
+
+        //        return new ResponseModel
+        //        {
+        //            Data = result
+        //        };
+
+
+        //}
     }
 }

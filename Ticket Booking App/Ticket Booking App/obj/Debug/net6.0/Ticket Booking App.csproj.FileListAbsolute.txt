@@ -200,3 +200,4 @@ D:\Ticket Booking Final\Back End\Ticket Booking App\Ticket Booking App\obj\Debug
 D:\Ticket Booking Final\Back End\Ticket Booking App\Ticket Booking App\obj\Debug\net6.0\Ticket Booking App.pdb
 D:\Ticket Booking Final\Back End\Ticket Booking App\Ticket Booking App\obj\Debug\net6.0\Ticket Booking App.genruntimeconfig.cache
 D:\Ticket Booking Final\Back End\Ticket Booking App\Ticket Booking App\obj\Debug\net6.0\ref\Ticket Booking App.dll
+D:\Ticket Booking Final\Back End\Ticket Booking App\Ticket Booking App\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

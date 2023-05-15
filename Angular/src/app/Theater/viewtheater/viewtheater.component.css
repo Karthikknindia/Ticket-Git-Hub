@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: auto auto ;
     height:33vh;
-    width: 35vw;
+    width: 45vw;
     padding: 10px;
   }
   .grids{
@@ -19,6 +19,14 @@
     margin-left: 30%;
    
   }
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  
+  body {
+    overflow-y: scroll;
+  }
+
   .description{
     text-align: center;
     align-items: center;

@@ -18,15 +18,16 @@ import { AuthGuard } from './service/auth/auth.guard';
 
 const routes: Routes = [
 
-  { path: '', redirectTo: '/login', pathMatch: 'full',  },
+  { path: '', redirectTo: 'login', pathMatch: 'full',  },
   { path: 'login', component: LoginComponent,  },
+  
   { path: 'admin', component: AdminComponent, canActivate : [AuthGuard]  },
   { path: 'user', component: UserComponent , canActivate : [AuthGuard] },
-  { path: 'addmovies', component: AddmoviesComponent },
-  { path: '', redirectTo: 'addmovies', pathMatch: 'full' },
-  { path: 'register', component: RegisterComponent },
-  { path: '', redirectTo: 'register', pathMatch: 'full' },
-  { path: 'payment', component:PaymentComponent },
+  { path: 'register', component: RegisterComponent,  },
+
+
+  
+  
   
 
   

@@ -40,7 +40,13 @@ button{
 
 /* des */
 
+body::-webkit-scrollbar {
+  display: none;
+}
 
+body {
+  overflow-x: scroll;
+}
 .grid-container2 {
     display: grid;
     grid-template-columns: auto auto ;

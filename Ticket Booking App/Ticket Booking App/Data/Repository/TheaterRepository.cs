@@ -26,28 +26,33 @@ namespace Ticket_Booking_App.Data.Repository
                     @theater_name = model.theater_name,
                     @theater_capacity = model.theater_capacity,
                     @theater_location = model.theater_location,
-                    @theater_screen = model.theater_screen,                   
+                    @theater_screen = model.theater_screen,
                     @theater_status = model.theater_status,
                     @theater_datetime = model.theater_datetime,
-                    @theater_createdate = model.theater_createdate,
-                    @theater_updatedate = model.theater_updatedate,
-                  
+                    @theater_createdate = DateTime.Now,
+                    @theater_updatedate = DateTime.Now,
+
 
 
                 }, commandType: CommandType.StoredProcedure);
 
 
-            }
-            return new ResponseModel
-            {
 
-            };
+                return new ResponseModel
+                {
+                    SuccessMessage = "Theater Addded",
+                    Data = result
+                };
+            }
         }
 
         public async Task<ResponseModel> DeleteAsync(int theater_id)
         {
-            var sql = "UPDATE tbl_theater SET theater_status = 'deleted' WHERE theater_id = @theater_id";
-            var result = await _con.ExecuteAsync(sql, new { theater_id = theater_id });
+            var sql = "sp_delete_theater";
+            var result = await _con.ExecuteAsync(sql, new 
+            {
+                @theater_id = theater_id
+            }, commandType: CommandType.StoredProcedure);
 
             return new ResponseModel
             {
@@ -58,7 +63,7 @@ namespace Ticket_Booking_App.Data.Repository
 
         public async Task<IReadOnlyList<Theater>> GetAllAsync()
         {
-            var sql = "SELECT * FROM tbl_theater WHERE theater_status <> 'deleted'";
+            var sql = "sp_get_all_theaters";
             {
 
                 var result = await _con.QueryAsync<Theater>(sql);
@@ -68,11 +73,14 @@ namespace Ticket_Booking_App.Data.Repository
 
         public async Task<ResponseModel> GetByIdAsync(int id)
         {
-            var sql = "SELECT * FROM tbl_theater WHERE theater_id = @theater_id";
+            var sql = "get_theater_by_id";
 
             {
                 //_con.Open();
-                var result = await _con.QuerySingleOrDefaultAsync<Theater>(sql, new { @theater_id = id });
+                var result = await _con.QuerySingleOrDefaultAsync<Theater>(sql, new 
+                { 
+                    @theater_id = id
+                }, commandType: CommandType.StoredProcedure);
                 return new ResponseModel
                 {
                     Data = result
@@ -88,25 +96,27 @@ namespace Ticket_Booking_App.Data.Repository
 
                 var result = await _con.QueryAsync(sql, new
                 {
-                    @theater_id=model.theater_id,
-                    @theater_name=model.theater_name,
-                    @theater_capacity=model.theater_capacity,
-                    @theater_location=model.theater_location,
-                    @theater_screen=model.theater_screen,
-                    @theater_status=model.theater_status,
-                    @theater_datetime=model.theater_datetime,
-                    @theater_createdate=model.theater_createdate,
-                    @theater_updatedate=model.theater_updatedate,
-                   
+                    @theater_id = model.theater_id,
+                    @theater_name = model.theater_name,
+                    @theater_capacity = model.theater_capacity,
+                    @theater_location = model.theater_location,
+                    @theater_screen = model.theater_screen,
+                    @theater_status = model.theater_status,
+                    @theater_datetime = DateTime.Now,
+                    @theater_createdate = DateTime.Now,
+                    @theater_updatedate = DateTime.Now,
+
 
                 }, commandType: CommandType.StoredProcedure);
 
 
-            }
-            return new ResponseModel
-            {
 
-            };
+                return new ResponseModel
+                {
+                    SuccessMessage = "Theater Updated",
+                    Data = result
+                };
+            }
         }
     }
 }

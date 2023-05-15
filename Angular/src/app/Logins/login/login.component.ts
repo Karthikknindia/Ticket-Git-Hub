@@ -69,9 +69,11 @@ export class LoginComponent implements OnInit {
         const username = response.data.data.login_name;
         const userEmail=response.data.data.login_email;
         const loginid=response.data.data.login_id;
-        
+        const token=response.token.result.token
+        const tokenid=response.token.result.token
 
-
+        sessionStorage.setItem('tokenid', tokenid,);
+        sessionStorage.setItem('token', token,);
         sessionStorage.setItem('username', username,);
         sessionStorage.setItem('userEmail', userEmail,);
         sessionStorage.setItem('loginid', loginid,);
@@ -82,11 +84,16 @@ export class LoginComponent implements OnInit {
       } else {
         
         if (response.status == "200") {
+          debugger
           localStorage.setItem('isLoggedIn', 'true');
           const username = response.data.data.login_name;
           const userEmail=response.data.data.login_email;
           const loginid=response.data.data.login_id;
+          const token=response.token.result.token
+          const tokenid=response.token.result.token
 
+          sessionStorage.setItem('tokenid', tokenid,);
+          sessionStorage.setItem('token', token,);
 
           sessionStorage.setItem('username', username,);
           sessionStorage.setItem('userEmail', userEmail,);

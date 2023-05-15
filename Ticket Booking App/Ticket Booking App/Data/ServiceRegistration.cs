@@ -15,6 +15,10 @@ namespace Ticket_Booking_App.Data
 
             services.AddTransient<IBookingRepository, BookingRepository>();
 
+            services.AddTransient<IJWTManagerRepository, JWTManagerRepository>();
+
+            services.AddTransient<IErrorRepository, ErrorRepository>();
+
         }
     }
 }

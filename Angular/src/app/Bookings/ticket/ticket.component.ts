@@ -134,17 +134,16 @@ export class TicketComponent {
       )
   }
 
-  getallmovies() {
-
-   
+   getallmovies(){
+    console.log(this.movie.movie_name)
     this.movieservice.getallmovies(this.movie)
-
-      .subscribe(
-        response => {
-          this.movies = response;
-
-        }
-      )
+    
+    .subscribe(
+      response=>{
+        this.movies=response;
+        
+      }
+    )
   }
   // downloadTicket() {
   //   const doc = new jsPDF({});

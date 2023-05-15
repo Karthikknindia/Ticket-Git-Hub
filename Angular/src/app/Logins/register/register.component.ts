@@ -94,8 +94,13 @@ export class RegisterComponent {
             debugger
             const username = response.data.retrievedLogin.login_name;
             const userEmail=response.data.retrievedLogin.login_email;
+            const token=response.token.result.token
             const loginid=response.data.retrievedLogin.login_id;
+            
+          
     
+            
+            sessionStorage.setItem('token', token,);
             sessionStorage.setItem('loginid', loginid,);
             sessionStorage.setItem('username', username,);
             sessionStorage.setItem('userEmail', userEmail,);

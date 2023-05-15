@@ -37,7 +37,7 @@
       My Bookings
     </button> -->
 
-        <button (click)="logout()" class="signout" mat-raised-button>
+        <button (click)="logout()" (click)="tokens()"class="signout" mat-raised-button>
             Sign Out
             {{username}} 
         </button>

@@ -1,7 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using Ticket_Booking_App.Data.Repository;
 using Ticket_Booking_App.Models;
 
@@ -14,9 +22,14 @@ namespace Ticket_Booking_App.Controllers
     {
 
         private readonly ILoginRepository _loginRepository;
-        public LoginController(ILoginRepository _loginRepository)
+        private readonly IJWTManagerRepository _jWTManager;
+        private readonly IErrorRepository _error;
+
+        public LoginController(ILoginRepository _loginRepository, IJWTManagerRepository jWTManager, IErrorRepository error)
         {
             this._loginRepository = _loginRepository;
+            this._jWTManager = jWTManager;
+            this._error = error;
         }
 
         [EnableCors("AllowOrigin")]
@@ -34,135 +47,235 @@ namespace Ticket_Booking_App.Controllers
 
         public async Task<IActionResult> Login([FromBody] Login login)
         {
-
-            var userExists = (await _loginRepository.GetAllAsync()).Where(u => u.login_email == login.login_email).FirstOrDefault();
-            if (userExists != null)
+            try
             {
 
-                return Ok(new
+
+
+                var userExists = (await _loginRepository.GetAllAsync()).Where(u => u.login_email == login.login_email).FirstOrDefault();
+                if (userExists != null)
                 {
-                    status = "409",
-                    message = "User Already Exist",
 
-                });
-            }
-            else
-            {
-
-                if (login != null)
-                {
-                    login.login_usertype = "u";
-                   
-
-                    var data = await _loginRepository.AddAsync(login);
-                    if (data != null)
+                    return Ok(new
                     {
-                        var retrievedLogin = (await _loginRepository.GetAllAsync()).Where(x => x.login_email == login.login_email).FirstOrDefault(); 
+                        status = "409",
+                        message = "User Already Exist",
+
+                    });
+                }
+                else
+                {
+
+                    if (login != null)
+                    {
+                        login.login_usertype = "u";
+
+
+                        var data = await _loginRepository.AddAsync(login);
+                        var token = _jWTManager.Authenticate(login);
+                        if (data != null)
+                        {
+
+                            var retrievedLogin = (await _loginRepository.GetAllAsync()).Where(x => x.login_email == login.login_email).FirstOrDefault();
+                            return Ok(new
+                            {
+                                token = token,
+                                status = "200",
+                                message = "success",
+                                data = new
+                                {
+                                    retrievedLogin
+                                }
+                            });
+                        }
+                        else
+                        {
+                            return Ok(new
+                            {
+                                status = "404",
+                                message = "Not Found",
+
+                            });
+                        }
+
+
+                    }
+                    else
+                    {
+                        return NoContent();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                var error = new Error { Message = ex.Message, StackTrace = ex.StackTrace, Timestamp = DateTime.Now };
+
+
+                await _error.AddError(error);
+
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.StackTrace);
+            }
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("Authenticate")]
+        public async Task<IActionResult> Authenticate([FromBody] Login login)
+        {
+            try
+            {
+
+
+                var data = (await _loginRepository.GetAllAsync()).Where(x => x.login_email == login.login_email && x.login_password == login.login_password).FirstOrDefault();
+
+                var token = _jWTManager.Authenticate(login);
+
+                if (data != null)
+                {
+
+
+
+
+
+
+                    if (data.login_usertype == "a")
+                    {
+
+
+
+
                         return Ok(new
                         {
-                            status = "200",
+                            token = token,
+                            status = "210",
                             message = "success",
                             data = new
                             {
-                                retrievedLogin
+                                data
                             }
                         });
                     }
                     else
                     {
+
+
                         return Ok(new
                         {
-                            status = "404",
-                            message = "Not Found",
-
+                            token = token,
+                            status = "200",
+                            message = "success",
+                            data = new
+                            {
+                                data
+                            }
                         });
                     }
 
-
                 }
+
                 else
                 {
-                    return NoContent();
+                    //return Unauthorized();
+
+                    return Ok(new
+                    {
+
+                        status = "404",
+                        message = "Not Found",
+                        data = new
+                        {
+                            data
+                        }
+                    });
                 }
+            }
+            catch (Exception ex)
+            {
+
+                var error = new Error { Message = ex.Message, StackTrace = ex.StackTrace, Timestamp = DateTime.Now };
+
+
+                await _error.AddError(error);
+
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.StackTrace);
+            }
+        }
+
+        [HttpDelete("{login_id}")]
+
+        public async Task<IActionResult> Delete(int login_id)
+        {
+            //string token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
+            //// Expire the token
+            //await _jWTManager.UpdateTokenStatusAsync();
+            try
+            {
+
+                var data = await _loginRepository.DeleteAsync(login_id);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+
+                var error = new Error { Message = ex.Message, StackTrace = ex.StackTrace, Timestamp = DateTime.Now };
+
+
+                await _error.AddError(error);
+
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.StackTrace);
             }
         }
         [HttpPost]
-        [Route("validate")]
-        public async Task<IActionResult> Loginin([FromBody] Login login)
+        [Route("Expired")]
+        public async Task<IActionResult> Token(string token)
         {
-            var data = (await _loginRepository.GetAllAsync()).Where(x => x.login_email == login.login_email && x.login_password == login.login_password).FirstOrDefault();
-
-
-
-            if (data != null)
+            //string token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            try
             {
 
-               
-
-                if (data.login_usertype == "a")
-                {
-                   
-                    
-                    
-
-                    return Ok(new
-                    {
-
-                        status = "210",
-                        message = "success",
-                        data = new
-                        {
-                            data
-                        }
-                    });
-                }
-                else
-                {
-
-
-                    return Ok(new
-                    {
-                        status = "200",
-                        message = "success",
-                        data = new
-                        {
-                            data
-                        }
-                    });
-                }
-
-            }
-            else
-            {
-
+                await _jWTManager.UpdateTokenStatusAsync(token);
 
                 return Ok(new
                 {
-                    status = "404",
-                    message = "Not Found",
-                    data = new
-                    {
-                       data
-                    }
+                    token = token,
+                    status = "200",
+                    message = "Sucess",
+
                 });
             }
+            catch (Exception ex)
+            {
 
+                var error = new Error { Message = ex.Message, StackTrace = ex.StackTrace, Timestamp = DateTime.Now };
+
+
+                await _error.AddError(error);
+
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.StackTrace);
+            }
         }
-
-        //[HttpDelete("{login_id}")]
-       
-        //public async Task<IActionResult> Delete(int login_id)
-        //{
-        //    var data = await _loginRepository.DeleteAsync(login_id);
-        //    return Ok(data);
-        //}
 
         [HttpPost]
         [Route("Update")]
         public async Task<IActionResult> Update([FromBody] int login_id)
         {
-            var data = await _loginRepository.UpdateAsync(login_id);
-            return Ok(data);
+            try
+            {
+
+                var data = await _loginRepository.UpdateAsync(login_id);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+
+                var error = new Error { Message = ex.Message, StackTrace = ex.StackTrace, Timestamp = DateTime.Now };
+
+
+                await _error.AddError(error);
+
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.StackTrace);
+            }
         }
 
 

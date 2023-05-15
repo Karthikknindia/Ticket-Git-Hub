@@ -22,7 +22,7 @@
       My Bookings
     </button>
 
-    <button (click)="logout()" class="signout" mat-raised-button >
+    <button (click)="logout()" (click)="tokens()" class="signout" mat-raised-button >
       Sign Out
       {{username}}
      </button>
@@ -50,7 +50,7 @@
 
   <!-- From Api -->
   <!-- LEO -->
-    <ngb-carousel  class="carousel" [interval]="4000000">
+    <ngb-carousel  class="carousel" [interval]="3000">
       <ng-template ngbSlide *ngFor="let movie of movies">
         <div class="grid-container">
           <div >

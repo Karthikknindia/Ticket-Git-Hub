@@ -72,6 +72,7 @@ export class UserComponent {
   username:any;
   userEmail:any;
   loginid: any;
+  token: any;
   constructor(private route: ActivatedRoute,private Loginservice: LoginService,private _dialog:MatDialog,private LoginService:LoginService,private router: Router,private movieservice:MovieserviceService,private sanitizer: DomSanitizer,private cdr: ChangeDetectorRef){
 
   }
@@ -81,7 +82,7 @@ export class UserComponent {
   this.username=sessionStorage.getItem('username');
   this.userEmail=sessionStorage.getItem('userEmail');
   this.loginid=sessionStorage.getItem('loginid');
-
+  this.token = sessionStorage.getItem('token');
   // this.route.paramMap.subscribe(params => {
   //   debugger
   //   this.userId = params.get('userId');
@@ -108,17 +109,17 @@ this.updateuser();
   )
  }
   
-  getallmovies(){
-    
-    this.movieservice.getallmovies(this.movie)
-
-    .subscribe(
-      response=>{
-        this.movies=response;
-        
-      }
-    )
-  }
+ getallmovies(){
+  console.log(this.movie.movie_name)
+  this.movieservice.getallmovies(this.movie)
+  
+  .subscribe(
+    response=>{
+      this.movies=response;
+      
+    }
+  )
+}
   getallusers() {
 
     this.Loginservice.getallusers(this.login)
@@ -189,4 +190,16 @@ this.updateuser();
           }
         )
       }
+
+      tokens(){
+        const token = sessionStorage.getItem('token') ?? ''; 
+        this.LoginService.token()
+          .subscribe(
+            response=>{
+              this.token=response;
+              console.log(response);
+            }
+          );
+      }
+      
 }
