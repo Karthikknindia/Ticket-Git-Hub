@@ -21,9 +21,9 @@ export class AddtheatorComponent {
 
     theater_id: 0,
     theater_name: '',
-    theater_capacity: 0,
+    theater_capacity: 100,
     theater_location: '',
-    theater_screen: null,
+    theater_screen: '1',
     theater_status: '',
     theater_datetime: new Date(),
     theater_createdate: new Date(),

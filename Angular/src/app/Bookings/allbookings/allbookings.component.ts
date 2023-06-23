@@ -35,6 +35,7 @@ export class AllbookingsComponent {
     booking_poster: '',
     booking_amount: ''
   }
+  showLoader: boolean = true;
   displayedColumns: string[] = ['sno', 'booking_name','booking_movie','booking_email','booking_date','booking_seats'];
   dataSource = new MatTableDataSource<bookings>(this.bookings);
   constructor(public movieservice: MovieserviceService, public bookingservice: BookingserviceService, private _snackBar: MatSnackBar) {
@@ -42,7 +43,9 @@ export class AllbookingsComponent {
   }
   ngOnInit(): void {
     debugger
-    
+    // setTimeout(() => {
+    //   this.showLoader = false; // Hide the loader after 2 seconds
+    // }, 2000);
     this.getallbooking()
   }
   ngAfterViewInit() {

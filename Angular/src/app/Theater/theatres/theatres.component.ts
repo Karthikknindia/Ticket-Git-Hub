@@ -29,7 +29,7 @@ export class TheatresComponent {
     theater_name: '',
     theater_capacity: 0,
     theater_location: '',
-    theater_screen: null,
+    theater_screen: '',
     theater_status: '',
     theater_datetime: new Date(),
     theater_createdate: new Date(),
@@ -41,21 +41,23 @@ export class TheatresComponent {
   movies:movies[]=[];
   ytlis!:[];
   movie:movies={
-  movie_id: 0,
-  movie_name: '',
-  movie_categories: '',
-  movie_theater: '',
-  movie_poster: '',
-  movie_showtiming: '',
-  movie_status: '',
-  movie_createdate: new Date,
-  movie_updatedate: new Date,
-  movie_timeduration: '',
-  movie_director: '',
-  movie_cast: '',
-  movie_thumbnail: '',
-  movie_ytlink: ''
-}
+    movie_id: 0,
+    movie_name: '',
+    movie_categories: '',
+    movie_theater: '',
+    movie_poster: '',
+    movie_showtiming: '',
+    movie_status: '',
+    movie_createdate: new Date,
+    movie_updatedate: new Date,
+    movie_timeduration: '',
+    movie_director: '',
+    movie_cast: '',
+    movie_thumbnail: '',
+    movie_ytlink: '',
+    movie_screen: ''
+  }
+  selectedScreen:any;
   selectedDate: any;
   maxDate: Date;
   selectedTheater: any;
@@ -83,8 +85,28 @@ export class TheatresComponent {
     }
   }
  
+  getTheaterScreens(theater: string): string {
+  const theaters = this.movie.movie_theater.split(',');
+  
+  let screenNumber = '';
+
+  for (let i = 0; i < theaters.length; i++) {
+    const theaterParts = theaters[i].trim().split('/');
+    if (theaterParts[0].trim() === theater.trim()) {
+      screenNumber = theaterParts[1].trim();
+      break;
+    }
+  }
+
+  return screenNumber;
+}
 
   
+selectTheater(theaterName: string,screenName: string) {
+  debugger
+  this.selectedTheater = theaterName;
+  this.selectedScreen = screenName;
+}
   ngOnInit(): void {
     this.getalltheaters();
 
@@ -113,10 +135,10 @@ export class TheatresComponent {
   
     this.selectedTiming = timing; 
     
-    this.dialogRef.close(TheatresComponent);
+    
     const dialogRef = this._dialog.open(SeatsComponent, {
       disableClose: true,
-      data: { row, selectedTiming: this.selectedTiming,selectedDate : this.selectedDate} 
+      data: { row, selectedTiming: this.selectedTiming,selectedDate : this.selectedDate,selectedTheater:this.selectedTheater,selectedScreen:this.selectedScreen} 
     });
   }
 

@@ -17,9 +17,10 @@
 
 					{{booking.booking_date}}
 				</p>
-				<div class="show-name" >
+				<div class="show-name">
 					<h1>{{booking.booking_movie}}</h1>
-					<h2>{{booking.booking_theater}}</h2>
+					<h2><strong>{{booking.booking_theater}}</strong> | Screen - {{selectedScreen}} </h2>
+
 				</div>
 				<div class="time">
 					<p>{{booking.booking_showtime}}</p>
@@ -38,8 +39,10 @@
 				</div>
 				<div class="time">
 					<p>Show Time - {{booking.booking_showtime}}</p>
-					<p>Seats - {{booking.booking_seats}} </p>
+					<p class="seats-right">Admit - {{numSeatsSelected}} </p>
+				
 				</div>
+
 				<div class="barcode">
 					<img src="assets\images\qr-code-bc94057f452f4806af70fd34540f72ad.png" alt="QR code">
 				</div>
@@ -49,15 +52,28 @@
 			</div>
 		</div>
 	</div>
-	<div >
+	<div>
 		<mat-dialog-actions align="center">
 
-			<button class="buttond" style="background-color: rgb(61, 60, 60);color: white;" (click)="downloadTicket()" mat-raised-button> Download Ticket </button>
+			<!-- <button class="buttond" style="background-color: rgb(61, 60, 60);color: white;" (click)="downloadTicket()"
+				mat-raised-button> Download Ticket </button> -->
+
+
+				<div class="button" (click)="downloadTicket()" >
+					<div class="button-wrapper">
+					  <div class="text">Download</div>
+						<span class="icon">
+						  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"></path></svg>
+						</span>
+					  </div>
+					</div>
+
+					
 		</mat-dialog-actions>
 	</div>
 	<div>
 
-        <button class="close"  mat-dialog-close="" color="warn" mat-raised-button>Close</button>
-    </div>
+		<button class="close" mat-dialog-close="" color="warn" mat-raised-button>Close</button>
+	</div>
 
 </body>

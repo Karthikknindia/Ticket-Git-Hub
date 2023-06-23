@@ -8,12 +8,14 @@ namespace Ticket_Booking_App.Data.Repository
     public class TheaterRepository : ITheaterRepository
     {
         private readonly IConfiguration configuration;
-        private readonly SqlConnection _con;
+        //private readonly SqlConnection _con;
+        private readonly IDbConnection _con;
 
-        public TheaterRepository(IConfiguration configuration)
+        public TheaterRepository(IConfiguration configuration, IDbConnection con)
         {
             this.configuration = configuration;
-            _con = new SqlConnection(configuration.GetConnectionString("TicketConnection"));
+            //_con = new SqlConnection(configuration.GetConnectionString("TicketConnection"));
+            _con = con;
         }
         public async Task<ResponseModel> AddAsync(Theater model)
         {

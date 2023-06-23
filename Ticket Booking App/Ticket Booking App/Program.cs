@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Configuration;
+using System.Data;
 using System.Text;
 using Ticket_Booking_App.Data;
 
@@ -49,15 +51,25 @@ builder.Services.AddSwaggerGen(c => {
 
 //builder.Services.AddDbContext<TicketDbContext>(options =>
 //options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddTransient<IDbConnection>(x =>
+{
+    var configuration = x.GetRequiredService<IConfiguration>();
+    var connection = configuration.GetConnectionString("TicketConnection");
+    return new SqlConnection(connection);
+});
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "AllowOrigin",
         builder =>
         {
-            builder.WithOrigins("https://localhost:44351", "http://localhost:4200")
-                                .AllowAnyHeader()
-                                .AllowAnyMethod();
+            //builder.WithOrigins("https://localhost:44351", "http://localhost:4200", "http://book-your-cinemas.netlify.app/")
+            //                    .AllowAnyHeader()
+            //                    .AllowAnyMethod();
+            
+                  builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
         });
 });
 
@@ -102,11 +114,11 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 app.UseRouting();
 app.UseCors();
 app.UseCors("AllowOrigin");

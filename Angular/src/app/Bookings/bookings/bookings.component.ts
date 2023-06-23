@@ -51,7 +51,8 @@ bookings: bookings[] = [];
     movie_timeduration: '',
     movie_cast: '',
     movie_thumbnail: '',
-    movie_ytlink: ''
+    movie_ytlink: '',
+    movie_screen: ''
   }
   selectedMovie: any;
 row: any;

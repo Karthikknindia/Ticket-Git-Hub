@@ -7,12 +7,14 @@ namespace Ticket_Booking_App.Data.Repository
     public class BookingRepository:IBookingRepository
     {
         private readonly IConfiguration configuration;
-        private readonly SqlConnection _con;
+        private readonly IDbConnection _con;
+        //private readonly SqlConnection _con;
 
-        public BookingRepository(IConfiguration configuration)
+        public BookingRepository(IConfiguration configuration, IDbConnection con)
         {
             this.configuration = configuration;
-            _con = new SqlConnection(configuration.GetConnectionString("TicketConnection"));
+            _con = con;
+            //_con = new SqlConnection(configuration.GetConnectionString("TicketConnection"));
         }
 
         public async Task<Booking> AddAsync(Booking model)

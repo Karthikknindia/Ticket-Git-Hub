@@ -9,6 +9,7 @@ D:\Ticket Booking Final\Back End\Ticket Booking App\Ticket Booking App\obj\Relea
 D:\Ticket Booking Final\Back End\Ticket Booking App\Ticket Booking App\obj\Release\net6.0\PubTmp\Out\Dapper.dll
 D:\Ticket Booking Final\Back End\Ticket Booking App\Ticket Booking App\obj\Release\net6.0\PubTmp\Out\EntityFramework.SqlServer.dll
 D:\Ticket Booking Final\Back End\Ticket Booking App\Ticket Booking App\obj\Release\net6.0\PubTmp\Out\EntityFramework.dll
+D:\Ticket Booking Final\Back End\Ticket Booking App\Ticket Booking App\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Ticket Booking Final\Back End\Ticket Booking App\Ticket Booking App\obj\Release\net6.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
 D:\Ticket Booking Final\Back End\Ticket Booking App\Ticket Booking App\obj\Release\net6.0\PubTmp\Out\Microsoft.Data.SqlClient.dll
 D:\Ticket Booking Final\Back End\Ticket Booking App\Ticket Booking App\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll

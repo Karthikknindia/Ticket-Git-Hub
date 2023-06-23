@@ -41,7 +41,8 @@ export class SeatsComponent {
     movie_timeduration: '',
     movie_cast: '',
     movie_thumbnail: '',
-    movie_ytlink: ''
+    movie_ytlink: '',
+    movie_screen: ''
   }
   theaters: theaters[] = [];
   theater: theaters = {
@@ -49,7 +50,7 @@ export class SeatsComponent {
     theater_name: '',
     theater_capacity: 0,
     theater_location: '',
-    theater_screen: null,
+    theater_screen: '',
     theater_status: '',
     theater_datetime: new Date(),
     theater_createdate: new Date(),
@@ -73,7 +74,8 @@ export class SeatsComponent {
     booking_poster: '',
     booking_amount: ''
   }
-
+  selectedScreen:any;
+  selectedTheater:any;
   selectedTiming: string = '';
   totalSeatsSelected: any;
   totalSeats: any;
@@ -115,7 +117,9 @@ export class SeatsComponent {
    this.numSeatsSelected=this.numSeatsSelected
     console.log(this.selectedSeats)
     this.movie = this.data.row
+    this.selectedScreen=this.data.selectedScreen
     this.selectedTiming=this.data.selectedTiming
+    this.selectedTheater=this.data.selectedTheater
     this.selectedSeats=this.selectedSeats
     this.theatercapacity=this.data.theatercapacity
    this.totalTicketPrice=this.totalTicketPrice
@@ -129,7 +133,9 @@ export class SeatsComponent {
       this.dialogRef.close(SeatsComponent)
       const dialogRef = this._dialog.open(PaymentComponent, {
         disableClose: true,
-        data: { row, selectedTiming: this.selectedTiming,selectedSeats:this.selectedSeats,selectedDate:this.selectedDate,numSeatsSelected:this.numSeatsSelected,totalTicketPrice:this.totalTicketPrice,shouldSubmit:this.shouldSubmit = true,} 
+        data: { row, selectedTiming: this.selectedTiming,selectedSeats:this.selectedSeats,
+          selectedDate:this.selectedDate,numSeatsSelected:this.numSeatsSelected,totalTicketPrice:this.totalTicketPrice,
+          shouldSubmit:this.shouldSubmit = true,selectedScreen:this.selectedScreen,selectedTheater:this.selectedTheater} 
         
       });
     } else {
@@ -192,14 +198,14 @@ export class SeatsComponent {
       this.selectedSeats = this.selectedSeats.filter(s => s !== seat.id); 
       
     } else {
-      if (this.numSeatsSelected < 5) { // check if the number of selected seats is less than 5
+      if (this.numSeatsSelected < 10) { 
         seat.classList.add('selected');
         this.totalSeats++;
         this.numSeatsSelected++;
         this.selectedSeats.push(seat.id);
        
       }else{
-        this._snackBar.open('Five Seats Only Allowed Per Person!', 'Close', { duration: 3000 });
+        this._snackBar.open('Ten Seats Only Allowed Per Person!', 'Close', { duration: 3000 });
       }
     }
  
@@ -219,10 +225,9 @@ export class SeatsComponent {
         this.bookings = response;
         this.bookedSeats = [];
   
-        // Filter the response array based on the movie name
+        
         const filteredBookings = response.filter(booking => booking.booking_movie === booking.booking_movie);
   
-        // Collect all booked seats from the filtered bookings
         filteredBookings.forEach(booking => {
           const seats = JSON.parse(booking.booking_seats);
           this.bookedSeats.push(...seats);

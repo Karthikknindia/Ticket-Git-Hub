@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
 import { InvalidpopupComponent } from '../invalidpopup/invalidpopup.component';
 
-import { ToastrService } from 'ngx-toastr';
+
 import { logins } from 'src/app/models/logins.model';
 import { LoginService } from 'src/app/service/login.service';
 
@@ -18,7 +18,7 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class LoginComponent implements OnInit {
   title = 'angular';
-
+  hide = true;
   logins: logins[] = [];
   login: logins = {
     login_id: 0,
@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     sessionStorage.clear();
+    
     this.loginForm = this.fb.group({
       login_email: ['', Validators.required],
       login_password: ['', Validators.required]
@@ -55,7 +56,9 @@ export class LoginComponent implements OnInit {
     
   }
  
+ 
   Login(row: any) {
+    debugger
     console.log(this.login);
     debugger
     
@@ -77,7 +80,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('username', username,);
         sessionStorage.setItem('userEmail', userEmail,);
         sessionStorage.setItem('loginid', loginid,);
-        
+        sessionStorage.setItem('role', 'admin');
         
         this.router.navigate(['/admin'])
         
@@ -89,11 +92,13 @@ export class LoginComponent implements OnInit {
           const username = response.data.data.login_name;
           const userEmail=response.data.data.login_email;
           const loginid=response.data.data.login_id;
-          const token=response.token.result.token
-          const tokenid=response.token.result.token
+          const token=response.token.result.token;
+          const tokenid=response.token.result.token;
 
           sessionStorage.setItem('tokenid', tokenid,);
           sessionStorage.setItem('token', token,);
+          sessionStorage.setItem('role', 'user');
+
 
           sessionStorage.setItem('username', username,);
           sessionStorage.setItem('userEmail', userEmail,);
@@ -108,23 +113,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  // Login(row: any) {
-  //   debugger
-  //   this.loginService.setLoggedIn(true);
-  //   this.loginService.Login(this.login).subscribe(response => {
-  //     console.log(response);
-  //     if (response.status == "210") {
-  //       this.router.navigate(['/admin'], { state: { loginDetails: this.login, row: row } });
-  //     } else {
-  //       if (response.status == "200") {
-  //         this.router.navigate(['/user'], { state: { loginDetails: this.login, row: row } });
-  //       } else {
-  //         this.dialog.open(InvalidpopupComponent);
-  //       }
-  //     }
-  //   });
-  // }
- 
+  
   
 
   

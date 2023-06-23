@@ -41,7 +41,7 @@ export class TheaterlistComponent implements OnInit  {
     theater_name : '',
     theater_capacity:0,
     theater_location:'',
-    theater_screen:null,
+    theater_screen:'',
     theater_status:'',
     theater_datetime:new Date(),
     theater_createdate:new Date(),

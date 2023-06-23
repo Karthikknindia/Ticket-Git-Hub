@@ -3,7 +3,6 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { AuthserviceService } from './authservice.service';
 import { LoginService } from '../login.service';
 
 
@@ -12,13 +11,35 @@ import { LoginService } from '../login.service';
 })
 export class AuthGuard implements CanActivate {
   constructor(public loginservice: LoginService, public router: Router) {}
-  canActivate(): boolean {
-    
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (!this.loginservice.isLoggedIn()) {
       this.router.navigate(['/login']);
       return false;
     }
+  
+    const userRole = sessionStorage.getItem('role');
+    const requestedRole = route.data['role']; 
+  
+    if (userRole !== requestedRole) {
+      this.router.navigate(['/login']);
+      return false;
+    }
+  
     return true;
   }
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
   
 }

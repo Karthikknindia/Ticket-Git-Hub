@@ -44,7 +44,7 @@ export class AddmoviesComponent implements OnInit {
     theater_name : '',
     theater_capacity:0,
     theater_location:'',
-    theater_screen:null,
+    theater_screen:'',
     theater_status:'',
     theater_datetime:new Date(),
     theater_createdate:new Date(),
@@ -69,8 +69,10 @@ export class AddmoviesComponent implements OnInit {
     movie_timeduration: '',
     movie_cast: '',
     movie_thumbnail: '',
-    movie_ytlink: ''
+    movie_ytlink: '',
+    movie_screen: ''
   }
+  selectedMovie!: string;
   currentNo = 1;
   dataSource = new MatTableDataSource<theaters>(this.theaters);
   sort: any;
@@ -103,6 +105,8 @@ export class AddmoviesComponent implements OnInit {
   
     reader.readAsDataURL(file);
   }
+
+  
   onFileChange2(event : any) {
     const file = event.target.files[0];
     const reader = new FileReader();

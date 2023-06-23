@@ -9,21 +9,25 @@ import { Observable } from 'rxjs';
 export class BookingserviceService {
 
 
-  baseUrl='https://localhost:44304/api/Booking';
+  baseUrl='https://192.168.1.186';
   constructor(private http: HttpClient) { }
 
   getallbooking(bookings: bookings): Observable<bookings[]>{
     const token = sessionStorage.getItem('token');
+    const endpoint = '/api/Booking/GetAllBooking';
+    const url = this.baseUrl + endpoint;
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
-    return this.http.post<bookings[]>("https://localhost:44304/api/Booking/GetAllBooking",bookings,httpOptions);
+    return this.http.post<bookings[]>(url,bookings,httpOptions);
   }
 
   addticket(bookings: bookings): Observable<any>{
     const token = sessionStorage.getItem('token');
+    const endpoint = '/api/Booking/AddBooking';
+    const url = this.baseUrl + endpoint;
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
@@ -31,16 +35,18 @@ export class BookingserviceService {
     };
     bookings.booking_id = 0;
     console.log(bookings);
-    return this.http.post<bookings>("https://localhost:44304/api/Booking/AddBooking", bookings,httpOptions);
+    return this.http.post<bookings>(url, bookings,httpOptions);
   }
   
   getBookingsByName(username: any): Observable<any> {
     const token = sessionStorage.getItem('token');
+    const endpoint = '/api/Booking';
+    const url = `${this.baseUrl}${endpoint}`;
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
-    return this.http.post<bookings>("https://localhost:44304/api/Booking/getbyname?username=" + username,username,httpOptions);
+    return this.http.post<any>(`${url}/getbyname?username=${username}`, null, httpOptions);
 }
 }

@@ -37,13 +37,15 @@
  
 
   </table>
-  <button mat-raised-button (click)=" addtheater()">
-    Add Theater
-  </button>
-  <button class="close" mat-raised-button mat-dialog-close="" color="primary">Cancel</button>
+  
+ 
  
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25]"
   [pageSize]="5" [length]="theaters.length">
  </mat-paginator>
+ <button mat-raised-button (click)=" addtheater()">
+  Add Theater
+</button>
+ <button class="close" mat-raised-button mat-dialog-close="" color="primary">Cancel</button>
 </body>

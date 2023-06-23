@@ -40,7 +40,8 @@ export class TicketComponent {
     movie_timeduration: '',
     movie_cast: '',
     movie_thumbnail: '',
-    movie_ytlink: ''
+    movie_ytlink: '',
+    movie_screen: ''
   }
 
   theaters: theaters[] = [];
@@ -50,7 +51,7 @@ export class TicketComponent {
     theater_name: '',
     theater_capacity: 0,
     theater_location: '',
-    theater_screen: null,
+    theater_screen: '',
     theater_status: '',
     theater_datetime: new Date(),
     theater_createdate: new Date(),
@@ -84,6 +85,9 @@ export class TicketComponent {
   bookingtik=false;
   totalTicketPrice2: any;
   amountstring: any;
+  selectedScreen: any;
+  selectedTheater: any;
+  numSeatsSelected: any;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private renderer: Renderer2, private _dialog: MatDialog, public movieservice: MovieserviceService, public bookingservice: BookingserviceService, private _snackBar: MatSnackBar) {
 
   }
@@ -101,6 +105,9 @@ export class TicketComponent {
     this.selectedTiming = this.data.selectedTiming
     this.selectedSeats = this.data.selectedSeats
     this.totalTicketPrice2=this.data.totalTicketPrice2
+    this.selectedScreen=this.data.selectedScreen
+    this.numSeatsSelected=this.data.numSeatsSelected
+    this.selectedTheater=this.data.selectedTheater
     debugger
     
    this.bookingtik=this.data.bookingtik
@@ -251,7 +258,7 @@ export class TicketComponent {
     this.booking.booking_poster=this.movie.movie_poster;
     let seatsString = JSON.stringify(this.data.selectedSeats);
     this.booking.booking_seats = seatsString;
-    this.booking.booking_theater=this.movie.movie_theater;
+    this.booking.booking_theater=this.selectedTheater;
     this.booking.booking_showtime=this.selectedTiming;
     this.booking.booking_date=this.selectedDate;
     let amountstring = JSON.stringify(this.data.totalTicketPrice2);

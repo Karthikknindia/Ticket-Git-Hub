@@ -6,14 +6,24 @@
 
     <div class="container">
 
-        <div class="input">
+        <!-- <div class="input">
 
             <mat-form-field appearance="outline">
                 <mat-label>Movie Name</mat-label>
                 <input matInput [(ngModel)]="movie.movie_name" name="Name" required>
             </mat-form-field>
-        </div>
+        </div> -->
+        <div class="input">
 
+            <mat-form-field appearance="outline">
+                <mat-label>Movies</mat-label>
+                <mat-select [(ngModel)]="movie.movie_name" name="movie" required [(value)]="selectedMovie">
+                    <mat-option *ngFor="let movie of movies" [value]="movie.movie_name" [value]="movie.movie_id">
+                        {{ movie.movie_name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
         <div class="input">
 
             <mat-form-field appearance="fill">

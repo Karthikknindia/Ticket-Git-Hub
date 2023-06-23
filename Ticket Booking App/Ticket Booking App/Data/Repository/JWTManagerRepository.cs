@@ -18,15 +18,16 @@ namespace Ticket_Booking_App.Data.Repository
 {
     public class JWTManagerRepository : IJWTManagerRepository
     {
-        private readonly SqlConnection _con;
+        //private readonly SqlConnection _con;
         private readonly IConfiguration iconfiguration;
-
+        private readonly IDbConnection _con;
         private readonly ILoginRepository _loginRepository;
-        public JWTManagerRepository(IConfiguration iconfiguration, ILoginRepository _loginRepository)
+        public JWTManagerRepository(IConfiguration iconfiguration, ILoginRepository _loginRepository, IDbConnection _con)
         {
             this.iconfiguration = iconfiguration;
             this._loginRepository = _loginRepository;
-            _con = new SqlConnection(iconfiguration.GetConnectionString("TicketConnection"));
+            //_con = new SqlConnection(iconfiguration.GetConnectionString("TicketConnection"));
+            this._con = _con;
         }
         public async Task<Tokens> Authenticate(Login login)
         {

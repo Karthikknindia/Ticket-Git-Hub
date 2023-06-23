@@ -45,7 +45,9 @@ p {
 
 .p-blue {
     font-size: 14px;
-    color: #1976d2
+    color: #1976d2;
+    margin-left: -5px;
+    
 }
 
 .fas.fa-circle {
@@ -54,7 +56,8 @@ p {
 
 .p-org {
     font-size: 14px;
-    color: #fbc02d
+    color: #fbc02d;
+    margin-left: -5px;
 }
 
 .h7 {
@@ -138,7 +141,7 @@ input.card {
     margin-top: 20px;
     margin-left: 10px;
     margin-bottom: 17px;
-    font-size: 25px;
+    font-size: 17px;
 }
 .button2 {
     margin-left: 55rem;
@@ -175,9 +178,22 @@ input.card {
     /* padding: 5px; */
     width: 27px;
     height: 24px;
+    background-color: #e8eaf6;
      
      }
      .close2:hover{
         color: aliceblue;
         background-color: black;
       }
+
+      
+ /* CSS to disable the spinner */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+      

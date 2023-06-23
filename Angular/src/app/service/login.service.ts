@@ -27,25 +27,28 @@ export class LoginService {
     token: ''
   }
 
-  baseUrl='https://localhost:44304/api/Login';
+  baseUrl='https://192.168.1.186';
   
   constructor(private http: HttpClient) { }
   
  
   getallusers(logins: logins): Observable<logins[]>{
     const token = sessionStorage.getItem('token');
+    const endpoint = '/api/Login/GetAllUser';
+    const url = this.baseUrl + endpoint;
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
-    return this.http.post<logins[]>('https://localhost:44304/api/Login/GetAllUser',logins,httpOptions);
+    return this.http.post<logins[]>(url, logins, httpOptions);
   }
   
   Login(logins: logins): Observable<any> {  
-    
+    const endpoint = '/api/Login/Authenticate';
+    const url = this.baseUrl + endpoint;
    
-    return this.http.post<logins>('https://localhost:44304/api/Login/Authenticate', logins);
+    return this.http.post<logins>(url, logins);
   }  
   isLoggedIn() {
     return localStorage.getItem('isLoggedIn') === 'true';
@@ -61,6 +64,8 @@ export class LoginService {
 
   adduser(logins: logins): Observable<any>{
     const token = sessionStorage.getItem('token');
+    const endpoint = '/api/Login/AddUser';
+    const url = this.baseUrl + endpoint;
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
@@ -68,11 +73,13 @@ export class LoginService {
     };
    logins.login_id=0
    console.log(logins)
-    return this.http.post<logins>('https://localhost:44304/api/Login/AddUser', logins,httpOptions);
+    return this.http.post<logins>(url, logins,httpOptions);
   }
 
   getsingleuser(logins: logins): Observable<any>{
-    return this.http.post<logins>('https://localhost:44304/api/Login/GetUsersById', logins);
+    const endpoint = '/api/Login/AddUser';
+    const url = this.baseUrl + endpoint;
+    return this.http.post<logins>(url, logins);
   }
 
 
@@ -80,32 +87,40 @@ export class LoginService {
 
   updateuser(login_id:number): Observable<logins> {
     const token = sessionStorage.getItem('token');
+    const endpoint = '/api/Login/update';
+    const url = this.baseUrl + endpoint;
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
    
-    return this.http.post<logins>('https://localhost:44304/api/Login/update', login_id,httpOptions ); 
+    return this.http.post<logins>(url, login_id,httpOptions ); 
   }
   logout(login_id:number): Observable<logins>{
+    debugger
+    const endpoint = '/api/Login/logout';
+    const url = this.baseUrl + endpoint;
     const token = sessionStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
-    return this.http.delete<logins>('https://localhost:44304/api/Login/'+login_id,httpOptions);
+    return this.http.post<logins>(url,login_id,httpOptions);
   }
   token(): Observable<any> {
+    const endpoint = '/api/Login/token';
+    const url = this.baseUrl + endpoint;
     const token = sessionStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
+    const expiredUrl = `${this.baseUrl}/api/Login/Expired?token=${token}`;
   
-    return this.http.post<any>(`https://localhost:44304/api/Login/Expired?token=${token}`, null, httpOptions);
+    return this.http.post<any>(expiredUrl, null, httpOptions);
   }
   
   

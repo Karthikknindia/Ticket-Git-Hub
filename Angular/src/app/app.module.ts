@@ -15,7 +15,7 @@ import { NgIf } from '@angular/common';
 import { SeatsComponent } from './Theater/seats/seats.component';
 import { TicketComponent } from './Bookings/ticket/ticket.component';
 import {MatSelectModule} from '@angular/material/select';
-
+import {MatSidenavModule} from '@angular/material/sidenav';
 import { BookingsComponent } from './Bookings/bookings/bookings.component';
 import { LoginComponent } from './Logins/login/login.component';
 import { UserComponent } from './Logins/user/user.component';
@@ -44,8 +44,12 @@ import { LoginService } from './service/login.service';
 import { TheateraddedpopupComponent } from './Theater/theateraddedpopup/theateraddedpopup.component';
 import { PaymentComponent } from './Bookings/payment/payment.component';
 import { AllbookingsComponent } from './Bookings/allbookings/allbookings.component';
-
-
+import { AddonlymoviesComponent } from './Movies/addonlymovies/addonlymovies.component';
+import { AddtotheatersComponent } from './Theater/addtotheaters/addtotheaters.component';
+import { AuthInterceptor } from './service/auth/auth.interceptor';
+import {  HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TheaterloginComponent } from './For Theater/theaterlogin/theaterlogin.component';
+import { TheaterhomeComponent } from './For Theater/theaterhome/theaterhome.component';
 
 
 
@@ -82,6 +86,11 @@ import { AllbookingsComponent } from './Bookings/allbookings/allbookings.compone
     TheateraddedpopupComponent,
     PaymentComponent,
     AllbookingsComponent,
+    AddonlymoviesComponent,
+    AddtotheatersComponent,
+   
+    TheaterloginComponent,
+        TheaterhomeComponent,
     
    
     
@@ -110,12 +119,18 @@ import { AllbookingsComponent } from './Bookings/allbookings/allbookings.compone
     FormsModule,
     MaterialModule,
     HttpClientModule,
+    MatSidenavModule,
    
     
 
     
   ],
-  providers: [LoginService],
+  // providers: [LoginService],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

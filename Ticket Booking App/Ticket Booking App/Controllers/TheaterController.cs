@@ -53,7 +53,7 @@ namespace Ticket_Booking_App.Controllers
 
                 if (theater != null)
                 {
-                    theater.theater_status = "online";
+                    theater.theater_status = "Y";
                     var data = await _theaterRepository.AddAsync(theater);
                     if (data != null)
                     {
@@ -97,9 +97,10 @@ namespace Ticket_Booking_App.Controllers
             }
         }
 
-        [HttpDelete("{theater_id}")]
+        [HttpPost]
+        [Route("Delete")]
 
-        public async Task<IActionResult> Delete(int theater_id)
+        public async Task<IActionResult> Delete([FromBody] int theater_id)
         {
             try
             {

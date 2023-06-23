@@ -10,20 +10,24 @@ export class TheaterserviceService {
   
  
 
-  baseUrl='https://localhost:44304/api/Theater';
+  baseUrl='https://192.168.1.186';
   constructor(private http: HttpClient) { }
 
   getalltheaters(theaters:theaters): Observable<theaters[]>{
     const token = sessionStorage.getItem('token');
+    const endpoint = '/api/Theater/GetAlltheaters';
+    const url = this.baseUrl + endpoint;
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
-    return this.http.post<theaters[]>("https://localhost:44304/api/Theater/GetAlltheaters",theaters,httpOptions);
+    return this.http.post<theaters[]>(url,theaters,httpOptions);
   }
   adduser(theaters: theaters): Observable<any>{
     const token = sessionStorage.getItem('token');
+    const endpoint = '/api/Theater/AddTheater';
+    const url = this.baseUrl + endpoint;
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
@@ -31,37 +35,43 @@ export class TheaterserviceService {
     };
     theaters.theater_id = 0;
     console.log(theaters);
-    return this.http.post<theaters>("https://localhost:44304/api/Theater/AddTheater", theaters,httpOptions);
+    return this.http.post<theaters>(url, theaters,httpOptions);
   }
 
   deletetheater(theater_id: number) : Observable<theaters>{
     const token = sessionStorage.getItem('token');
+    const endpoint = '/api/Theater/Delete';
+    const url = this.baseUrl + endpoint;
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
-    return this.http.delete<theaters>("https://localhost:44304/api/Theater/" + theater_id,httpOptions); 
+    return this.http.post<theaters>(url , theater_id,httpOptions); 
   }
   getTheaterById(theater_id:number): Observable<theaters> {
    
     const token = sessionStorage.getItem('token');
+    const endpoint = '/api/Theater/';
+    const url = this.baseUrl + endpoint;
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
-    return this.http.post<theaters>("https://localhost:44304/api/Theater/" , theater_id,httpOptions);
+    return this.http.post<theaters>(url , theater_id,httpOptions);
   }
   
   updateTheater(theaters: theaters): Observable<any> {
     const token = sessionStorage.getItem('token');
+    const endpoint = '/api/Theater/UpdateTheater';
+    const url = this.baseUrl + endpoint;
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
    
-    return this.http.post<theaters>("https://localhost:44304/api/Theater/UpdateTheater",theaters,httpOptions);
+    return this.http.post<theaters>(url,theaters,httpOptions);
   }
 }

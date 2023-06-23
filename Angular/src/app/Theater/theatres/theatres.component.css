@@ -20,7 +20,7 @@ button{
   top: 0;
   right: -46.8rem;
    border: none;
-   
+   background-color: white;
    
    }
    .close2:hover{
@@ -40,13 +40,7 @@ button{
 
 /* des */
 
-body::-webkit-scrollbar {
-  display: none;
-}
 
-body {
-  overflow-x: scroll;
-}
 .grid-container2 {
     display: grid;
     grid-template-columns: auto auto ;
@@ -76,5 +70,5 @@ body {
     margin-top: 2rem;
     
   }
- 
+ /* ----------------------- */
     

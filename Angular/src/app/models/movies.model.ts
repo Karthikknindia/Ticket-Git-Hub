@@ -4,6 +4,7 @@ export interface movies {
     movie_categories:string;
     movie_theater:string;
     movie_poster:string;
+    movie_screen:string;
     movie_showtiming:string;
     movie_status:string;
     movie_createdate:Date;

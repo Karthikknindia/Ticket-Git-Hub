@@ -20,7 +20,16 @@ body::-webkit-scrollbar {
 body {
   overflow-y: scroll;
 }
-
+.buttonnavb{
+  background-color: #015c8777;
+  border: none;
+  color: white;
+  position: absolute;
+  margin-left: 80rem;
+}
+.buttonnavb:hover{
+  background-color: #02577f;
+}
 
 /* .leobutton{
   margin-left: 15.5rem;
@@ -201,3 +210,6 @@ h1{
   
   
 }
+
+
+/* ------------------------------------------------------------ */

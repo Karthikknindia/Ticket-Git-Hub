@@ -8,6 +8,7 @@ import { DeletemovieComponent } from '../deletemovie/deletemovie.component';
 import { ViewmovieComponent } from '../viewmovie/viewmovie.component';
 import { movies } from 'src/app/models/movies.model';
 import { MovieserviceService } from 'src/app/service/movieservice.service';
+import { AddonlymoviesComponent } from '../addonlymovies/addonlymovies.component';
 
 
 export interface PeriodicElement {
@@ -36,21 +37,22 @@ export class MovieslistComponent implements OnInit {
   title = 'Ticket';
   movies:movies[]=[];
   movie:movies={
-  movie_id: 0,
-  movie_name: '',
-  movie_categories: '',
-  movie_theater: '',
-  movie_poster: '',
-  movie_showtiming: '',
-  movie_status: '',
-  movie_createdate: new Date,
-  movie_updatedate: new Date,
-  movie_timeduration: '',
-  movie_director: '',
-  movie_cast: '',
-  movie_thumbnail: '',
-  movie_ytlink: ''
-}
+    movie_id: 0,
+    movie_name: '',
+    movie_categories: '',
+    movie_theater: '',
+    movie_poster: '',
+    movie_showtiming: '',
+    movie_status: '',
+    movie_createdate: new Date,
+    movie_updatedate: new Date,
+    movie_timeduration: '',
+    movie_director: '',
+    movie_cast: '',
+    movie_thumbnail: '',
+    movie_ytlink: '',
+    movie_screen: ''
+  }
 currentNo = 1;
 
 
@@ -62,7 +64,7 @@ currentNo = 1;
 
   ngOnInit(): void {
    
-    this.getallmovies();
+   this.getallmovies();
   }
 
   constructor(private _dialog:MatDialog,private movieservice:MovieserviceService,public dialogRef: MatDialogRef<MovieslistComponent>) {}
@@ -89,7 +91,7 @@ currentNo = 1;
   }
   addmovie(){
     this.currentNo++;
-    this._dialog.open(AddmoviesComponent,{
+    this._dialog.open(AddonlymoviesComponent,{
       disableClose: true,
     })
     this.dialogRef.close(MovieslistComponent);

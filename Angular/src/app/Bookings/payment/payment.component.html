@@ -1,3 +1,5 @@
+
+
 <div class="container">
     <button mat-dialog-close type="button" class="close2" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -55,7 +57,7 @@
             <div class="box-left">
                 <p class="textmuted h8">Invoice</p>
                 <p class="fw-bold h7">{{username}}</p>
-                <p class="textmuted h8">{{movie.movie_theater}}</p>
+                <p class="textmuted h8">{{selectedTheater}}</p>
                 <p class="textmuted h8 mb-2">Coimbatore</p>
                 <div class="h8">
                     <div class="row m-0 border mb-3">
@@ -101,12 +103,16 @@
                 <div class="">
                     <p class="h7 fw-bold mb-1">Pay this Invoice</p>
                     <p class="textmuted h8 mb-2">Make payment for this invoice by Selecting Payment</p>
-                    <form ngNativeValidate #form="ngForm" (ngSubmit)="ticket(movie)">
+                    <form ngNativeValidate  [formGroup]="myForm"  (ngSubmit)="ticket(movie)">
 
-                        <mat-form-field appearance="outline">
-                            <mat-label>Mobile Number</mat-label>
-                            <input type="number" matInput name="num" minlength="10" maxlength="10" required>
-                        </mat-form-field>
+                        
+                            <mat-form-field appearance="outline">
+                              <mat-label>Mobile Number</mat-label>
+                              <input matInput name="num" minlength="10" maxlength="10" formControlName="num">
+                              <mat-error *ngIf="myForm.controls['num'].errors?.['pattern']">Only numbers are allowed.</mat-error>
+                            </mat-form-field>
+                        
+                          
 
 
 
@@ -115,7 +121,7 @@
                             <input type="email" matInput name="upiId" required>
                         </mat-form-field>
 
-                        <button class="buttonb" mat-raised-button color="primary">Pay & Book Ticket</button>
+                        <button class="buttonb" mat-raised-button color="primary" [disabled]="myForm.invalid">Pay & Book Ticket</button>
                     </form>
 
                 </div>
@@ -123,4 +129,6 @@
         </div>
     </div>
     <button  class="button2" mat-raised-button mat-dialog-close="" color="red">Cancel</button>
+  
+
 </div>

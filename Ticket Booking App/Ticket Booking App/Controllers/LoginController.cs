@@ -201,9 +201,11 @@ namespace Ticket_Booking_App.Controllers
             }
         }
 
-        [HttpDelete("{login_id}")]
+        //[HttpDelete("{login_id}")]
+        [HttpPost]
+        [Route("logout")]
 
-        public async Task<IActionResult> Delete(int login_id)
+        public async Task<IActionResult> Delete([FromBody] int login_id)
         {
             //string token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
 

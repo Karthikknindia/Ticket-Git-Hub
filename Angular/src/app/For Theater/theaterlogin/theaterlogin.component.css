@@ -1,0 +1,66 @@
+body {
+  background-color: rgb(2, 28, 71)
+}
+
+.container {
+  max-width: 12rem;
+ 
+  border: 1px solid white;
+  top: 26%;
+  padding: 12rem;
+  left: 37%;
+  position: absolute;
+  background-color: rgba(240, 248, 255, 0.814);
+
+}
+.button{
+  position: absolute;
+  bottom: 81px;
+  right: 4%;
+  /* padding: 4px; */
+  max-width: 22rem;
+}
+.button2{
+  position: absolute;
+  bottom: 19px;
+  right: 4%;
+  /* padding: 4px; */
+  max-width: 22rem;
+}
+button{
+ 
+}
+.example-form {
+  max-width: 538px;
+  padding-left: 3rem;
+  width: 100%;
+  top: 0%;
+  position: absolute;
+  top: 23%;
+  left: -6%;
+
+}
+
+.example-full-width {
+  width: 100%;
+}
+h1{
+  position: absolute;
+  color: #f2f2f2;
+  align-items: center;
+  /* text-align: center; */
+  /* margin-left: -17rem; */
+  top: 0%;
+  right: 28%;
+  margin-top: 10px;
+  font-family: cursive;
+}
+.head{
+  border: 0px solid #f2f2f2;
+  top: 0%;
+  left: 0%;
+  position: absolute;
+  padding-left: 23.9rem;
+  background-color: black;
+  padding-bottom: 62px;
+}

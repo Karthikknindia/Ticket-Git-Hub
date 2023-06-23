@@ -12,6 +12,8 @@ import { RegisterComponent } from './Logins/register/register.component';
 import { PaymentComponent } from './Bookings/payment/payment.component';
 
 import { AuthGuard } from './service/auth/auth.guard';
+import { TheaterloginComponent } from './For Theater/theaterlogin/theaterlogin.component';
+import { TheaterhomeComponent } from './For Theater/theaterhome/theaterhome.component';
 
 
 
@@ -21,9 +23,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full',  },
   { path: 'login', component: LoginComponent,  },
   
-  { path: 'admin', component: AdminComponent, canActivate : [AuthGuard]  },
-  { path: 'user', component: UserComponent , canActivate : [AuthGuard] },
+  { path: 'admin', component: AdminComponent, canActivate : [AuthGuard],data: { role: 'admin' }  },
+  { path: 'user', component: UserComponent , canActivate : [AuthGuard], data: { role: 'user' } },
   { path: 'register', component: RegisterComponent,  },
+  {path:'theater',component:TheaterloginComponent},
+  {path:'theaterhome',component:TheaterhomeComponent}
 
 
   

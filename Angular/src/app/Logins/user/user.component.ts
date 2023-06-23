@@ -9,6 +9,7 @@ import { BookingsComponent } from 'src/app/Bookings/bookings/bookings.component'
 import { TheatresComponent } from 'src/app/Theater/theatres/theatres.component';
 import { LoginService } from 'src/app/service/login.service';
 import { MovieserviceService } from 'src/app/service/movieservice.service';
+import { AddonlymoviesComponent } from 'src/app/Movies/addonlymovies/addonlymovies.component';
 
 @Component({
   selector: 'app-user',
@@ -42,7 +43,8 @@ export class UserComponent {
     movie_director: '',
     movie_cast: '',
     movie_thumbnail: '',
-    movie_ytlink: ''
+    movie_ytlink: '',
+    movie_screen: ''
   }
 
 
@@ -148,7 +150,7 @@ this.updateuser();
     });
    
   }
-
+ 
   openBookings(){
     this._dialog.open(BookingsComponent,{
       disableClose: true,

@@ -38,7 +38,7 @@ namespace Ticket_Booking_App.Controllers
 
                 if (movies != null)
                 {
-                    movies.movie_status = "online";
+                    movies.movie_status = "Y";
                     var data = await _moviesRepository.AddAsync(movies);
                     if (data != null)
                     {
@@ -80,9 +80,10 @@ namespace Ticket_Booking_App.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.StackTrace);
             }
         }
-        [HttpDelete("{movie_id}")]
+        [HttpPost]
+        [Route("Delete")]
 
-        public async Task<IActionResult> Delete(int movie_id)
+        public async Task<IActionResult> Delete([FromBody] int movie_id)
 
         {
             try
